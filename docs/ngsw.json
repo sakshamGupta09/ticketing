@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1681037489696,
+  "timestamp": 1681039174836,
   "index": "/ticketing/index.html",
   "assetGroups": [
     {
@@ -37,7 +37,8 @@
         "/ticketing/assets/icons/icon-384x384.png",
         "/ticketing/assets/icons/icon-512x512.png",
         "/ticketing/assets/icons/icon-72x72.png",
-        "/ticketing/assets/icons/icon-96x96.png"
+        "/ticketing/assets/icons/icon-96x96.png",
+        "/ticketing/assets/images/logo/logo.webp"
       ],
       "patterns": []
     }
@@ -53,6 +54,7 @@
     "/ticketing/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
     "/ticketing/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/ticketing/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/ticketing/assets/images/logo/logo.webp": "425da9cbfe36fcd67eeb4015635cdedc4e65efb1",
     "/ticketing/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
     "/ticketing/index.html": "00157525a840868dd52ac96a829c12534310a9d5",
     "/ticketing/main.0f7759a7dacffd06.js": "72b0f041400231f69a03076b5376db706c349668",
