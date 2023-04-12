@@ -8,6 +8,10 @@ $color-accent: mat.define-palette(mat.$green-palette, 500);
 
 $color-warn: mat.define-palette(mat.$red-palette);
 
+:root {
+  --colorPrimary: #f57c00;
+}
+
 $app-typography: mat.define-typography-config(
   $font-family: "Open Sans",
 );
