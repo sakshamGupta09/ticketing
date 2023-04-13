@@ -7,7 +7,7 @@ import ERROR_MESSAGES from 'src/app/core/constants/form-errors';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
 })
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit {
   public form: FormGroup = {} as FormGroup;
 
   public isLoading: boolean = false;
