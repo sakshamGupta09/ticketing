@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ERROR_MESSAGES from 'src/app/core/constants/form-errors';
 import PATTERNS from 'src/app/core/constants/regex';
+import { fieldsMatchValidator } from 'src/app/core/form-validators/confirm-password';
 
 @Component({
   selector: 'app-reset-password',
@@ -24,16 +25,19 @@ export class ResetPasswordComponent {
   }
 
   private initForm(): void {
-    this.form = this.fb.group({
-      password: [
-        '',
-        [Validators.required, Validators.pattern(PATTERNS.STRONG_PASSWORD)],
-      ],
-      confirmPassword: [
-        '',
-        [Validators.required, Validators.pattern(PATTERNS.STRONG_PASSWORD)],
-      ],
-    });
+    this.form = this.fb.group(
+      {
+        password: [
+          '',
+          [Validators.required, Validators.pattern(PATTERNS.STRONG_PASSWORD)],
+        ],
+        confirmPassword: [
+          '',
+          [Validators.required, Validators.pattern(PATTERNS.STRONG_PASSWORD)],
+        ],
+      },
+      { validators: fieldsMatchValidator }
+    );
   }
 
   get password() {
