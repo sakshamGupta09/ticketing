@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, throwError } from 'rxjs';
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
@@ -21,6 +21,7 @@ export class ResponseInterceptor implements HttpInterceptor {
           if (error instanceof HttpErrorResponse) {
             // error
           }
+          return throwError(error);
         },
       })
     );
