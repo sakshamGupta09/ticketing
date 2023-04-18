@@ -6,16 +6,18 @@ import { LoginComponent } from './login.component';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 
 describe('LoginComponent', () => {
-  test('it should render email and password fields', async () => {
+  test('it should render email, password fields and submit button', async () => {
     const { fixture } = await render(LoginComponent, {
       imports: [TestModule],
     });
 
     const emailControl = screen.getByRole('textbox', { name: /email/i });
     const passwordControl = screen.getByLabelText(/password/i);
+    const submitControl = screen.getByRole('button', { name: /login/i });
 
     expect(emailControl).toBeInTheDocument();
     expect(passwordControl).toBeInTheDocument();
+    expect(submitControl).toBeInTheDocument();
   });
 
   test('it should render forget password link', async () => {
