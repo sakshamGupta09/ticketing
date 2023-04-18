@@ -2,9 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 
 import { TestModule } from '../../../../tests/test.module';
-
 import { LoginComponent } from './login.component';
-
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 
 describe('LoginComponent', () => {
@@ -54,8 +52,8 @@ describe('LoginComponent', () => {
       screen.getByText(ERROR_MESSAGES['passwordRequired'])
     ).toBeInTheDocument();
 
-    userEvent.type(emailControl, 'john@gmail.com');
-    userEvent.type(passwordControl, '123456');
+    await userEvent.type(emailControl, 'john@gmail.com');
+    await userEvent.type(passwordControl, '123456');
 
     expect(emailControl).toBeValid();
     expect(emailControl).toHaveValue('john@gmail.com');
@@ -64,11 +62,11 @@ describe('LoginComponent', () => {
     expect(passwordControl).toHaveValue('123456');
 
     expect(
-      screen.getByText(ERROR_MESSAGES['emailRequired'])
+      screen.queryByText(ERROR_MESSAGES['emailRequired'])
     ).not.toBeInTheDocument();
 
     expect(
-      screen.getByText(ERROR_MESSAGES['passwordRequired'])
+      screen.queryByText(ERROR_MESSAGES['passwordRequired'])
     ).not.toBeInTheDocument();
   });
 });
