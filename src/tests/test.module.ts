@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -13,6 +14,7 @@ import { AlertModule } from '@shared/alert/alert.module';
   declarations: [],
   imports: [
     CommonModule,
+    HttpClientTestingModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -24,6 +26,7 @@ import { AlertModule } from '@shared/alert/alert.module';
   ],
   exports: [
     CommonModule,
+    HttpClientTestingModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
