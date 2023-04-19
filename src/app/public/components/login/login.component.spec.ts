@@ -1,9 +1,13 @@
-import { render, screen, fireEvent } from '@testing-library/angular';
+import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
+import { TestBed } from '@angular/core/testing';
+import { createMock } from '@testing-library/angular/jest-utils';
 
 import { TestModule } from '../../../../tests/test.module';
 import { LoginComponent } from './login.component';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
+import { PublicService } from '../../services/public.service';
+import { of } from 'rxjs';
 
 describe('LoginComponent', () => {
   test('it should render email, password fields and submit button', async () => {
@@ -70,5 +74,39 @@ describe('LoginComponent', () => {
     expect(
       screen.queryByText(ERROR_MESSAGES['passwordRequired'])
     ).not.toBeInTheDocument();
+  });
+
+  test('login API should be called only if the form is valid', async () => {
+    const mockLoginService = createMock(PublicService);
+    mockLoginService.login.mockImplementation(() => of({}));
+
+    const { fixture } = await render(LoginComponent, {
+      imports: [TestModule],
+      componentProviders: [
+        { provide: PublicService, useValue: mockLoginService },
+      ],
+    });
+
+    const loginService = TestBed.inject(PublicService);
+    const submitControl = screen.getByRole('button', { name: /login/i });
+    const emailControl = screen.getByRole('textbox', { name: /email/i });
+    const passwordControl = screen.getByLabelText(/password/i);
+
+    userEvent.click(submitControl);
+
+    await waitFor(() => {
+      expect(fixture.componentInstance.form.invalid).toEqual(true);
+      expect(loginService.login).toHaveBeenCalledTimes(0);
+    });
+
+    await userEvent.type(emailControl, 'john@gmail.com');
+    await userEvent.type(passwordControl, '123456');
+
+    userEvent.click(submitControl);
+
+    await waitFor(() => {
+      expect(fixture.componentInstance.form.valid).toEqual(true);
+      expect(loginService.login).toHaveBeenCalledTimes(1);
+    });
   });
 });
