@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
+import { PublicService } from '../../services/public.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   public loginFailed: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private service: PublicService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -44,9 +45,15 @@ export class LoginComponent implements OnInit {
       return this.form.markAllAsTouched();
     }
     this.isLoading = true;
-    setTimeout(() => {
-      this.isLoading = false;
-      this.loginFailed = true;
-    }, 4000);
+
+    this.service.login(this.form.value).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.loginFailed = true;
+      },
+    });
   }
 }
