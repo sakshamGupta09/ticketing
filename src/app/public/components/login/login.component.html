@@ -14,7 +14,8 @@
       <!-- Email -->
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Email</mat-label>
-        <input type="email" autofocus formControlName="email" matInput placeholder="Enter your email" required>
+        <input type="email" autofocus formControlName="email" matInput placeholder="Enter your email" required
+          name="email">
         <mat-icon class="icon-light" matSuffix>mail_outline</mat-icon>
 
         <!-- Errors -->
@@ -27,7 +28,7 @@
       <!-- Password -->
       <mat-form-field appearance="outline" class="w-full mt-xs">
         <mat-label>Password</mat-label>
-        <input formControlName="password" matInput [type]="hidePassword ? 'password' : 'text'" required>
+        <input formControlName="password" matInput [type]="hidePassword ? 'password' : 'text'" required name="password">
         <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
           <mat-icon class="icon-light">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
@@ -40,8 +41,8 @@
 
       <!-- Forgot password -->
       <div class="text-right">
-        <a routerLink="../forgot-password">
-          <span class="text-sm font-bold text-grey spacing-wide">Forgot Password ?</span>
+        <a class="text-sm font-bold text-grey spacing-wide" routerLink="../forgot-password">
+          Forgot Password ?
         </a>
       </div>
 
