@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import ERROR_MESSAGES from '../../../core/constants/form-errors';
+import ERROR_MESSAGES from 'src/app/core/constants/form-errors';
 
 @Component({
   selector: 'app-forgot-password',
