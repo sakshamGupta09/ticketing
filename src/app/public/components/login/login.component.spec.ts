@@ -7,7 +7,7 @@ import { TestModule } from '../../../../tests/test.module';
 import { LoginComponent } from './login.component';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 import { PublicService } from '../../services/public.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('LoginComponent', () => {
   test('it should render email, password fields and submit button', async () => {
@@ -107,6 +107,43 @@ describe('LoginComponent', () => {
     await waitFor(() => {
       expect(fixture.componentInstance.form.valid).toEqual(true);
       expect(loginService.login).toHaveBeenCalledTimes(1);
+      expect(loginService.login).toHaveBeenCalledWith(
+        fixture.componentInstance.form.value
+      );
+    });
+  });
+
+  test('it should render an alert message if login api fails', async () => {
+    const mockLoginService = createMock(PublicService);
+    mockLoginService.login.mockImplementation(() =>
+      throwError(() => new Error('Invalid credentials'))
+    );
+
+    const { fixture, detectChanges } = await render(LoginComponent, {
+      imports: [TestModule],
+      componentProviders: [
+        {
+          provide: PublicService,
+          useValue: mockLoginService,
+        },
+      ],
+    });
+
+    const submitControl = screen.getByRole('button', { name: /login/i });
+    const loginService = TestBed.inject(PublicService);
+
+    fixture.componentInstance.form.setValue({
+      email: 'john@gmail.com',
+      password: '123456',
+    });
+
+    detectChanges();
+
+    userEvent.click(submitControl);
+
+    await waitFor(() => {
+      expect(loginService.login).toHaveBeenCalledTimes(1);
+      expect(screen.getByRole('alert')).toBeInTheDocument();
     });
   });
 });

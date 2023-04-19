@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     }
     this.isLoading = true;
 
-    this.service.login().subscribe({
+    this.service.login(this.form.value).subscribe({
       next: (response) => {
         this.isLoading = false;
       },

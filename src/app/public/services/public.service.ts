@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 export class PublicService {
   constructor(private http: HttpClient) {}
 
-  public login() {
+  public login(payload: any) {
     return of({});
   }
 }
