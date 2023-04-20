@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+  HttpResponse,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Observable, tap, throwError } from 'rxjs';
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
-  constructor() {}
-
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap({
         next: (event) => {

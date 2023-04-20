@@ -2,7 +2,7 @@ import { ForgotPasswordComponent } from './forgot-password.component';
 import { TestModule } from '../../../../tests/test.module';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
+import { render, screen, fireEvent } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { TestBed } from '@angular/core/testing';
 import { createMock } from '@testing-library/angular/jest-utils';
@@ -42,9 +42,6 @@ describe('ForgotPasswordComponent', () => {
     });
 
     const emailControl = screen.getByRole('textbox', { name: /email/i });
-    const submitControl = screen.getByRole('button', {
-      name: /reset password/i,
-    });
 
     expect(emailControl).toBeInvalid();
 

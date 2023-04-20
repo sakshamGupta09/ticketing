@@ -12,11 +12,11 @@ import { PublicService } from '../../services/public.service';
 export class ForgotPasswordComponent implements OnInit {
   public form: FormGroup = {} as FormGroup;
 
-  public isLoading: boolean = false;
+  public isLoading = false;
 
   readonly formErrors = ERROR_MESSAGES;
 
-  public emailVerificationFailed: boolean = false;
+  public emailVerificationFailed = false;
 
   constructor(private fb: FormBuilder, private service: PublicService) {}
 
@@ -41,10 +41,10 @@ export class ForgotPasswordComponent implements OnInit {
     this.isLoading = true;
 
     this.service.sendResetPasswordMail(this.form.value.email).subscribe({
-      next: (response) => {
+      next: () => {
         this.isLoading = false;
       },
-      error: (error) => {
+      error: () => {
         this.isLoading = false;
         this.emailVerificationFailed = true;
       },
