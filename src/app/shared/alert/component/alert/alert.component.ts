@@ -10,7 +10,7 @@ import ALERT_CONFIG from '../../constants';
 export class AlertComponent {
   @Input() type: AlertTypes = 'success';
 
-  @Input() title: string = '';
+  @Input() title = '';
 
   readonly alertConfig = ALERT_CONFIG;
 }

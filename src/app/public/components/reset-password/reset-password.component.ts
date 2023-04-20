@@ -9,14 +9,14 @@ import { fieldsMatchValidator } from 'src/app/core/form-validators/confirm-passw
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss'],
 })
-export class ResetPasswordComponent {
+export class ResetPasswordComponent implements OnInit {
   public form: FormGroup = {} as FormGroup;
 
-  public isLoading: boolean = false;
+  public isLoading = false;
 
   readonly formErrors = ERROR_MESSAGES;
 
-  public hidePassword: boolean = true;
+  public hidePassword = true;
 
   constructor(private fb: FormBuilder) {}
 

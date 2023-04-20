@@ -11,13 +11,13 @@ import { PublicService } from '../../services/public.service';
 export class LoginComponent implements OnInit {
   public form: FormGroup = {} as FormGroup;
 
-  public hidePassword: boolean = true;
+  public hidePassword = true;
 
-  public isLoading: boolean = false;
+  public isLoading = false;
 
   readonly formErrors = ERROR_MESSAGES;
 
-  public loginFailed: boolean = false;
+  public loginFailed = false;
 
   constructor(private fb: FormBuilder, private service: PublicService) {}
 
@@ -47,10 +47,10 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
 
     this.service.login(this.form.value).subscribe({
-      next: (response) => {
+      next: () => {
         this.isLoading = false;
       },
-      error: (error) => {
+      error: () => {
         this.isLoading = false;
         this.loginFailed = true;
       },

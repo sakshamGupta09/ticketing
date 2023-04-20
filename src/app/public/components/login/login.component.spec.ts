@@ -11,7 +11,7 @@ import { of, throwError } from 'rxjs';
 
 describe('LoginComponent', () => {
   test('it should render email, password fields and submit button', async () => {
-    const { fixture } = await render(LoginComponent, {
+    await render(LoginComponent, {
       imports: [TestModule],
     });
 
