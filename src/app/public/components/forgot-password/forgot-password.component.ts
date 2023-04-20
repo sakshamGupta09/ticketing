@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 
+import { PublicService } from '../../services/public.service';
+
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -16,7 +18,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   public emailVerificationFailed: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private service: PublicService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -37,9 +39,15 @@ export class ForgotPasswordComponent implements OnInit {
       return this.form.markAllAsTouched();
     }
     this.isLoading = true;
-    setTimeout(() => {
-      this.isLoading = false;
-      this.emailVerificationFailed = true;
-    }, 3000);
+
+    this.service.sendResetPasswordMail(this.form.value.email).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.emailVerificationFailed = true;
+      },
+    });
   }
 }
