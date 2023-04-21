@@ -26,6 +26,14 @@
             "prefix": "app",
             "style": "kebab-case"
           }
+        ],
+        "object-curly-spacing": [
+          "error",
+          "always",
+          {
+            "objectsInObjects": true,
+            "arraysInObjects": true
+          }
         ]
       }
     },
