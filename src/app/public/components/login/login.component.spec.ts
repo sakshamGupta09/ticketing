@@ -34,6 +34,7 @@ describe('LoginComponent', () => {
     });
 
     expect(linkElement).toBeInTheDocument();
+    expect(linkElement).toHaveAttribute('href', '/forgot-password');
   });
 
   test('it is possible to fill in a form and verify error messages', async () => {

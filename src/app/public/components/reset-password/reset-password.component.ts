@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import ERROR_MESSAGES from 'src/app/core/constants/form-errors';
-import PATTERNS from 'src/app/core/constants/regex';
-import { fieldsMatchValidator } from 'src/app/core/form-validators/confirm-password';
+import ERROR_MESSAGES from '../../../core/constants/form-errors';
+import PATTERNS from '../../../core/constants/regex';
+import { fieldsMatchValidator } from '../../../core/form-validators/confirm-password';
+import { PublicService } from '../../services/public.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -18,7 +19,7 @@ export class ResetPasswordComponent implements OnInit {
 
   public hidePassword = true;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private service: PublicService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -53,5 +54,14 @@ export class ResetPasswordComponent implements OnInit {
       return this.form.markAllAsTouched();
     }
     this.isLoading = true;
+
+    this.service.changePassword(this.form.value.password).subscribe({
+      next: () => {
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
   }
 }

@@ -13,4 +13,8 @@ export class PublicService {
   public sendResetPasswordMail(email: string) {
     return of(email);
   }
+
+  public changePassword(newPassword: string) {
+    return of(newPassword);
+  }
 }
