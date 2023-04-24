@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
+import { render, screen, fireEvent } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { TestBed } from '@angular/core/testing';
 import { createMock } from '@testing-library/angular/jest-utils';
@@ -7,7 +7,7 @@ import { TestModule } from '../../../../tests/test.module';
 import { ResetPasswordComponent } from './reset-password.component';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 import { PublicService } from '../../services/public.service';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 
 describe('ResetPasswordComponent', () => {
   test('it should render new password and confirm password fields', async () => {
