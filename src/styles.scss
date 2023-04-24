@@ -1,12 +1,13 @@
-@import "./assets/css/theme.scss";
-@import "./assets/css/width-height.scss";
-@import "./assets/css/flex.scss";
-@import "./assets/css/colors.scss";
-@import "./assets/css/padding-margins.scss";
-@import "./assets/css/typography.scss";
-@import "./assets/css/button.scss";
-@import "./assets/css/borders.scss";
-@import "./assets/css/utilities.scss";
+@import './assets/css/theme.scss';
+@import './assets/css/variables.scss';
+@import './assets/css/width-height.scss';
+@import './assets/css/flex.scss';
+@import './assets/css/colors.scss';
+@import './assets/css/padding-margins.scss';
+@import './assets/css/typography.scss';
+@import './assets/css/button.scss';
+@import './assets/css/borders.scss';
+@import './assets/css/utilities.scss';
 
 html {
   height: 100%;
@@ -16,10 +17,10 @@ html {
 body {
   margin: 0;
   font-size: 1rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.87);
-  background-color: rgb(239 246 255);
+  background-color: #eff3f8;
 }
 
 *,

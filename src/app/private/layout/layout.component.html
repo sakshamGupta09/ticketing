@@ -1,1 +1,13 @@
-<router-outlet></router-outlet>
+<aside class="sidebar" [class.sidebar--open]="isSidebarOpen">
+  <app-sidebar></app-sidebar>
+</aside>
+
+<div class="layout__container">
+  <app-header (menuButtonClicked)="menuClickHandler()"></app-header>
+  <main class="layout__content">
+    <p>Hello world</p>
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<!-- <app-backdrop *ngIf="isSidebarOpen"></app-backdrop> -->
