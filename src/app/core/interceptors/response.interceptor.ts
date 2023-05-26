@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -9,7 +8,6 @@ import {
 } from '@angular/common/http';
 import { Observable, tap, throwError } from 'rxjs';
 
-@Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
   intercept(
     request: HttpRequest<unknown>,

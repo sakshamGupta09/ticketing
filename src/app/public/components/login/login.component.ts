@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 import { PublicService } from '../../services/public.service';
+import { IHttpErrorResponse } from 'src/app/core/models/api-response';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   readonly formErrors = ERROR_MESSAGES;
 
-  public loginFailed = false;
+  public errorMessage: string = '';
 
   constructor(private fb: FormBuilder, private service: PublicService) {}
 
@@ -41,18 +42,20 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit(): void {
+    this.errorMessage = '';
+
     if (this.form.invalid) {
       return this.form.markAllAsTouched();
     }
     this.isLoading = true;
 
     this.service.login(this.form.value).subscribe({
-      next: () => {
+      next: (response) => {
         this.isLoading = false;
       },
-      error: () => {
+      error: (error: IHttpErrorResponse) => {
         this.isLoading = false;
-        this.loginFailed = true;
+        this.errorMessage = error.message;
       },
     });
   }

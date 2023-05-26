@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -8,7 +7,6 @@ import {
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
-@Injectable()
 export class RequestInterceptor implements HttpInterceptor {
   intercept(
     request: HttpRequest<unknown>,

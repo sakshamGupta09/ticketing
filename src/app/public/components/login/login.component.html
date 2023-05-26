@@ -1,58 +1,97 @@
-<div class="h-page flex justify-center items-center bg-img">
-  <div class="card__container rounded bg-white w-full">
+<div class="h-page flex justify-center items-center bg-img overflow-y-auto">
+  <div class="card__container rounded-lg bg-white w-full">
     <!-- Logo -->
-    <img src="assets/images/logo/logo.webp" width="100%" alt="Code Syndicates logo">
+    <div class="text-center">
+      <app-logo></app-logo>
+    </div>
 
-    <!-- API Error -->
-    <div class="mt-sm" *ngIf="loginFailed && !isLoading">
-      <app-alert type="error" [title]="formErrors['loginFailed']"></app-alert>
+    <!--  Error -->
+    <div class="mt-sm" *ngIf="errorMessage">
+      <app-alert type="error" [title]="errorMessage"></app-alert>
     </div>
 
     <!-- Form -->
-    <form [formGroup]="form" class="mt-md" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
-
+    <form
+      [formGroup]="form"
+      class="mt-md"
+      novalidate
+      autocomplete="off"
+      (ngSubmit)="onSubmit()">
       <!-- Email -->
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Email</mat-label>
-        <input type="email" autofocus formControlName="email" matInput placeholder="Enter your email" required
-          name="email">
+        <input
+          type="email"
+          autofocus
+          formControlName="email"
+          matInput
+          placeholder="Enter your email"
+          required
+          name="email" />
         <mat-icon class="icon-light" matSuffix>mail_outline</mat-icon>
 
         <!-- Errors -->
         <mat-error *ngIf="email?.invalid">
-          <ng-container *ngIf="email?.errors?.['required']">{{formErrors['emailRequired']}}</ng-container>
-          <ng-container *ngIf="email?.errors?.['email']">{{formErrors['invalidEmail']}}</ng-container>
+          <ng-container *ngIf="email?.errors?.['required']">{{
+            formErrors['emailRequired']
+          }}</ng-container>
+          <ng-container *ngIf="email?.errors?.['email']">{{
+            formErrors['invalidEmail']
+          }}</ng-container>
         </mat-error>
       </mat-form-field>
 
       <!-- Password -->
       <mat-form-field appearance="outline" class="w-full mt-xs">
         <mat-label>Password</mat-label>
-        <input formControlName="password" matInput [type]="hidePassword ? 'password' : 'text'" required name="password">
-        <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
-          <mat-icon class="icon-light">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <input
+          formControlName="password"
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          required
+          name="password" />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword">
+          <mat-icon class="icon-light">{{
+            hidePassword ? 'visibility_off' : 'visibility'
+          }}</mat-icon>
         </button>
 
         <!-- Errors -->
         <mat-error *ngIf="password?.invalid">
-          <ng-container *ngIf="password?.errors?.['required']">{{formErrors['passwordRequired']}}</ng-container>
+          <ng-container *ngIf="password?.errors?.['required']">{{
+            formErrors['passwordRequired']
+          }}</ng-container>
         </mat-error>
       </mat-form-field>
 
       <!-- Forgot password -->
       <div class="text-right">
-        <a class="text-sm font-bold text-grey spacing-wide" routerLink="/forgot-password">
+        <a
+          class="text-sm font-bold text-grey spacing-wide"
+          routerLink="/forgot-password">
           Forgot Password ?
         </a>
       </div>
 
       <!-- Submit -->
-      <button type="submit" [disabled]="isLoading" mat-raised-button color="primary"
-        class="w-full mt-md btn-height font-bold text-white">
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        mat-raised-button
+        color="primary"
+        class="w-full mt-sm btn-height font-bold text-white">
         <span [hidden]="isLoading">LOGIN</span>
-        <fa-icon [hidden]="!isLoading" icon="circle-notch" class="color-theme" [spin]="true" size="xl"></fa-icon>
+        <fa-icon
+          [hidden]="!isLoading"
+          icon="circle-notch"
+          class="color-theme"
+          [spin]="true"
+          size="xl"></fa-icon>
       </button>
-
     </form>
   </div>
 </div>

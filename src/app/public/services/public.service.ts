@@ -1,20 +1,30 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { IHttpResponse } from 'src/app/core/models/api-response';
+import { ILoginResponse } from '../models';
+import { environment } from 'src/environments/environment.development';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PublicService {
   constructor(private http: HttpClient) {}
 
-  public login(payload: unknown) {
-    return of(payload);
+  public login(payload: { email: string; password: string }) {
+    return this.http
+      .post<IHttpResponse<ILoginResponse>>(
+        `${environment.API_BASE_URL}/auth/login`,
+        payload
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => throwError(() => error.error))
+      );
   }
 
   public sendResetPasswordMail(email: string) {
-    return of(email);
+    return this.http.post(`${environment.API_BASE_URL}/auth/login`, {});
   }
 
   public changePassword(newPassword: string) {
-    return of(newPassword);
+    return this.http.post(`${environment.API_BASE_URL}/auth/login`, {});
   }
 }

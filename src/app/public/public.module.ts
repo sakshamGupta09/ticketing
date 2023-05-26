@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconsModule } from '../shared/icons/icons.module';
 import { AlertModule } from '../shared/alert/alert.module';
+import { LogoModule } from '@shared/logo/logo.module';
 import { PublicRoutingModule } from './public-routing.module';
 
 import { LoginComponent } from './components/login/login.component';
@@ -33,6 +34,7 @@ import { ForgotPasswordEmailSentComponent } from './components/forgot-password-e
     ReactiveFormsModule,
     IconsModule,
     AlertModule,
+    LogoModule,
   ],
 })
 export class PublicModule {}

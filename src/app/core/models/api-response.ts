@@ -1,7 +1,10 @@
-interface IApiResponse<T> {
-  status: number;
+export interface IHttpResponse<T> {
+  statusCode: number;
   message: string;
   data: T;
 }
 
-export default IApiResponse;
+export interface IHttpErrorResponse {
+  statusCode: number;
+  message: string;
+}
