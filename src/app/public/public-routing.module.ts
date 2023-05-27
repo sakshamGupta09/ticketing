@@ -25,7 +25,7 @@ const routes: Routes = [
     canActivate: [loggedInGuard],
   },
   {
-    path: 'reset-password',
+    path: 'reset-password/:authToken',
     component: ResetPasswordComponent,
     canActivate: [loggedInGuard],
   },

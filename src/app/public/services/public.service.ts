@@ -33,7 +33,17 @@ export class PublicService {
       );
   }
 
-  public changePassword(newPassword: string) {
-    return this.http.post(`${environment.API_BASE_URL}/auth/login`, {});
+  public changePassword(authToken: string, newPassword: string) {
+    return this.http
+      .post<IHttpResponse<{}>>(
+        `${environment.API_BASE_URL}/auth/resetPassword`,
+        {
+          token: authToken,
+          password: newPassword,
+        }
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => throwError(() => error.error))
+      );
   }
 }

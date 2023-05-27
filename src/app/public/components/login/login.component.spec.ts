@@ -8,6 +8,8 @@ import { LoginComponent } from './login.component';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 import { PublicService } from '../../services/public.service';
 import { of, throwError } from 'rxjs';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { Router } from '@angular/router';
 
 describe('LoginComponent', () => {
   test('it should render email, password fields and submit button', async () => {
@@ -24,10 +26,17 @@ describe('LoginComponent', () => {
     expect(submitControl).toBeInTheDocument();
   });
 
-  test('it should render forget password link', async () => {
+  test('it should render forget password link and navigate', async () => {
     await render(LoginComponent, {
       imports: [TestModule],
+      routes: [
+        { path: '', component: LoginComponent },
+        { path: 'forgot-password', component: ForgotPasswordComponent },
+      ],
     });
+
+    const router = TestBed.inject(Router);
+    jest.spyOn(router, 'navigateByUrl');
 
     const linkElement = screen.getByRole('link', {
       name: /Forgot Password ?/i,
@@ -35,6 +44,11 @@ describe('LoginComponent', () => {
 
     expect(linkElement).toBeInTheDocument();
     expect(linkElement).toHaveAttribute('href', '/forgot-password');
+
+    await userEvent.click(linkElement);
+    await waitFor(() => {
+      expect(router.navigateByUrl).toHaveBeenCalled();
+    });
   });
 
   test('it is possible to fill in a form and verify error messages', async () => {

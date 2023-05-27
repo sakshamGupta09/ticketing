@@ -4,6 +4,8 @@ import ERROR_MESSAGES from '../../../core/constants/form-errors';
 import PATTERNS from '../../../core/constants/regex';
 import { fieldsMatchValidator } from '../../../core/form-validators/confirm-password';
 import { PublicService } from '../../services/public.service';
+import { ActivatedRoute } from '@angular/router';
+import { AlertTypes } from '@shared/alert/models';
 
 @Component({
   selector: 'app-reset-password',
@@ -19,10 +21,25 @@ export class ResetPasswordComponent implements OnInit {
 
   public hidePassword = true;
 
-  constructor(private fb: FormBuilder, private service: PublicService) {}
+  private authToken: string = '';
+
+  public alertConfig: { type: AlertTypes; title: string };
+
+  constructor(
+    private fb: FormBuilder,
+    private service: PublicService,
+    private route: ActivatedRoute
+  ) {
+    this.alertConfig = { type: 'info', title: '' };
+  }
 
   ngOnInit(): void {
+    this.fetchRouteParams();
     this.initForm();
+  }
+
+  private fetchRouteParams(): void {
+    this.authToken = this.route.snapshot.params['authToken'];
   }
 
   private initForm(): void {
@@ -55,13 +72,21 @@ export class ResetPasswordComponent implements OnInit {
     }
     this.isLoading = true;
 
-    this.service.changePassword(this.form.value.password).subscribe({
-      next: () => {
-        this.isLoading = false;
-      },
-      error: () => {
-        this.isLoading = false;
-      },
-    });
+    this.service
+      .changePassword(this.authToken, this.form.value.password)
+      .subscribe({
+        next: (response) => {
+          this.isLoading = false;
+          this.showAlert('success', response.message);
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.showAlert('error', error.message);
+        },
+      });
+  }
+
+  private showAlert(type: AlertTypes, title: string): void {
+    this.alertConfig = { type, title };
   }
 }
