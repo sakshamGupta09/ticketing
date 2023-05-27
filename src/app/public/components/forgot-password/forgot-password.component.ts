@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 
 import { PublicService } from '../../services/public.service';
+import { AlertTypes } from '@shared/alert/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,9 +18,15 @@ export class ForgotPasswordComponent implements OnInit {
 
   readonly formErrors = ERROR_MESSAGES;
 
-  public emailVerificationFailed = false;
+  public alertConfig: { type: AlertTypes; title: string };
 
-  constructor(private fb: FormBuilder, private service: PublicService) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: PublicService,
+    private router: Router
+  ) {
+    this.alertConfig = { type: 'info', title: '' };
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -41,13 +49,18 @@ export class ForgotPasswordComponent implements OnInit {
     this.isLoading = true;
 
     this.service.sendResetPasswordMail(this.form.value.email).subscribe({
-      next: () => {
+      next: (response) => {
         this.isLoading = false;
+        this.router.navigate(['/email-sent']);
       },
-      error: () => {
+      error: (error) => {
         this.isLoading = false;
-        this.emailVerificationFailed = true;
+        this.showAlert('error', error.message);
       },
     });
+  }
+
+  private showAlert(type: AlertTypes, title: string): void {
+    this.alertConfig = { type, title };
   }
 }

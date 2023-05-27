@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
 
     this.service.login(this.form.value).subscribe({
       next: (response) => {
+        this.postLoginSuccess();
         this.isLoading = false;
       },
       error: (error: IHttpErrorResponse) => {
@@ -59,4 +60,6 @@ export class LoginComponent implements OnInit {
       },
     });
   }
+
+  private postLoginSuccess(): void {}
 }

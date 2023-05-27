@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconsModule } from '@shared/icons/icons.module';
 import { AlertModule } from '@shared/alert/alert.module';
+import { LogoModule } from '@shared/logo/logo.module';
 
 @NgModule({
   declarations: [],
@@ -21,6 +22,7 @@ import { AlertModule } from '@shared/alert/alert.module';
     MatButtonModule,
     IconsModule,
     AlertModule,
+    LogoModule,
     FormsModule,
     ReactiveFormsModule,
   ],
@@ -33,6 +35,7 @@ import { AlertModule } from '@shared/alert/alert.module';
     MatButtonModule,
     IconsModule,
     AlertModule,
+    LogoModule,
     FormsModule,
     ReactiveFormsModule,
   ],

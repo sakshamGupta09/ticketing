@@ -38,7 +38,7 @@ describe('LoginComponent', () => {
   });
 
   test('it is possible to fill in a form and verify error messages', async () => {
-    await render(LoginComponent, {
+    const { detectChanges } = await render(LoginComponent, {
       imports: [TestModule],
     });
 
@@ -67,6 +67,8 @@ describe('LoginComponent', () => {
 
     expect(passwordControl).toBeValid();
     expect(passwordControl).toHaveValue('123456');
+
+    detectChanges();
 
     expect(
       screen.queryByText(ERROR_MESSAGES['emailRequired'])
@@ -117,7 +119,10 @@ describe('LoginComponent', () => {
   test('it should render an alert message if login api fails', async () => {
     const mockLoginService = createMock(PublicService);
     mockLoginService.login.mockImplementation(() =>
-      throwError(() => new Error('Invalid credentials'))
+      throwError(() => ({
+        statusCode: 404,
+        message: 'Invalid email or password',
+      }))
     );
 
     const { fixture, detectChanges } = await render(LoginComponent, {
@@ -145,6 +150,9 @@ describe('LoginComponent', () => {
     await waitFor(() => {
       expect(loginService.login).toHaveBeenCalledTimes(1);
       expect(screen.getByRole('alert')).toBeInTheDocument();
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'Invalid email or password'
+      );
     });
   });
 });

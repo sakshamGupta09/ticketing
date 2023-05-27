@@ -2,13 +2,14 @@ import { ForgotPasswordComponent } from './forgot-password.component';
 import { TestModule } from '../../../../tests/test.module';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 
-import { render, screen, fireEvent } from '@testing-library/angular';
+import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { TestBed } from '@angular/core/testing';
 import { createMock } from '@testing-library/angular/jest-utils';
 
 import { PublicService } from '../../services/public.service';
 import { of, throwError } from 'rxjs';
+import { ForgotPasswordEmailSentComponent } from '../forgot-password-email-sent/forgot-password-email-sent.component';
 
 describe('ForgotPasswordComponent', () => {
   test('it should render email field and submit button', async () => {
@@ -37,7 +38,7 @@ describe('ForgotPasswordComponent', () => {
   });
 
   test('it is possible to fill in a form and verify error messages', async () => {
-    await render(ForgotPasswordComponent, {
+    const { detectChanges } = await render(ForgotPasswordComponent, {
       imports: [TestModule],
     });
 
@@ -48,17 +49,19 @@ describe('ForgotPasswordComponent', () => {
     fireEvent.blur(emailControl);
 
     expect(
-      screen.getByText(ERROR_MESSAGES['emailRequired'])
+      await screen.findByText(ERROR_MESSAGES['emailRequired'])
     ).toBeInTheDocument();
 
     await userEvent.type(emailControl, 'abc');
 
     expect(
-      screen.getByText(ERROR_MESSAGES['invalidEmail'])
+      await screen.findByText(ERROR_MESSAGES['invalidEmail'])
     ).toBeInTheDocument();
 
     await userEvent.clear(emailControl);
     await userEvent.type(emailControl, 'john@gmail.com');
+
+    detectChanges();
 
     expect(emailControl).toBeValid();
     expect(screen.queryByText(ERROR_MESSAGES['emailRequired'])).toBeNull();
@@ -94,7 +97,7 @@ describe('ForgotPasswordComponent', () => {
   test('should render an alert if api throws an error', async () => {
     const mockService = createMock(PublicService);
     mockService.sendResetPasswordMail.mockImplementation(() =>
-      throwError(() => new Error('Something went wrong'))
+      throwError(() => ({ statusCode: 404, message: 'Email does not exists' }))
     );
 
     const { fixture } = await render(ForgotPasswordComponent, {
@@ -113,9 +116,34 @@ describe('ForgotPasswordComponent', () => {
     expect(service.sendResetPasswordMail).toHaveBeenCalledWith(
       fixture.componentInstance.form.value.email
     );
-    expect(screen.getByRole('alert')).toBeInTheDocument();
-    expect(screen.getByRole('alert')).toHaveTextContent(
-      ERROR_MESSAGES['forgotPasswordFailed']
+
+    const alert = await screen.findByRole('alert');
+    expect(alert).toBeInTheDocument();
+    expect(alert).toHaveTextContent('Email does not exists');
+  });
+
+  test('should navigate to email-sent screen if API returns success response', async () => {
+    const mockService = createMock(PublicService);
+    mockService.sendResetPasswordMail.mockImplementation(() =>
+      of({ statusCode: 200, message: 'Email sent', data: {} })
+    );
+
+    const { fixture } = await render(ForgotPasswordComponent, {
+      imports: [TestModule],
+      providers: [{ provide: PublicService, useValue: mockService }],
+      declarations: [ForgotPasswordEmailSentComponent],
+    });
+
+    const service = TestBed.inject(PublicService);
+    const submitBtn = screen.getByRole('button', { name: /reset password/i });
+    const emailControl = screen.getByRole('textbox', { name: /email/i });
+
+    await userEvent.type(emailControl, 'john@gmail.com');
+    await userEvent.click(submitBtn);
+
+    expect(service.sendResetPasswordMail).toHaveBeenCalledTimes(1);
+    expect(service.sendResetPasswordMail).toHaveBeenCalledWith(
+      fixture.componentInstance.form.get('email')?.value
     );
   });
 });
