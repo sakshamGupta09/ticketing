@@ -5,6 +5,14 @@
       <app-logo></app-logo>
     </div>
 
+    <h3 class="text-center text-xl font-bold spacing-wide mt-sm">
+      Welcome User!
+    </h3>
+    <p
+      class="text-center mt-xs text-grey-secondary spacing-wide leading-7 font-medium mb-sm">
+      Please login to continue.
+    </p>
+
     <!--  Error -->
     <div class="mt-sm" *ngIf="errorMessage">
       <app-alert type="error" [title]="errorMessage"></app-alert>
