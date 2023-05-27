@@ -11,6 +11,8 @@ import { PublicService } from '../../services/public.service';
 import { of, throwError } from 'rxjs';
 import { ForgotPasswordEmailSentComponent } from '../forgot-password-email-sent/forgot-password-email-sent.component';
 
+import { Router } from '@angular/router';
+
 describe('ForgotPasswordComponent', () => {
   test('it should render email field and submit button', async () => {
     await render(ForgotPasswordComponent, {
@@ -74,7 +76,12 @@ describe('ForgotPasswordComponent', () => {
 
     const { fixture } = await render(ForgotPasswordComponent, {
       imports: [TestModule],
+      declarations: [ForgotPasswordEmailSentComponent],
       componentProviders: [{ provide: PublicService, useValue: mockService }],
+      routes: [
+        { path: 'forgot-password', component: ForgotPasswordComponent },
+        { path: 'email-sent', component: ForgotPasswordEmailSentComponent },
+      ],
     });
 
     const service = TestBed.inject(PublicService);
@@ -132,9 +139,16 @@ describe('ForgotPasswordComponent', () => {
       imports: [TestModule],
       providers: [{ provide: PublicService, useValue: mockService }],
       declarations: [ForgotPasswordEmailSentComponent],
+      routes: [
+        { path: 'forgot-password', component: ForgotPasswordComponent },
+        { path: 'email-sent', component: ForgotPasswordEmailSentComponent },
+      ],
     });
 
     const service = TestBed.inject(PublicService);
+    const router = TestBed.inject(Router);
+    jest.spyOn(router, 'navigate');
+
     const submitBtn = screen.getByRole('button', { name: /reset password/i });
     const emailControl = screen.getByRole('textbox', { name: /email/i });
 
@@ -145,5 +159,6 @@ describe('ForgotPasswordComponent', () => {
     expect(service.sendResetPasswordMail).toHaveBeenCalledWith(
       fixture.componentInstance.form.get('email')?.value
     );
+    expect(router.navigate).toHaveBeenCalledWith(['/email-sent']);
   });
 });

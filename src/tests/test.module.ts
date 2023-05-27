@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -25,6 +26,7 @@ import { LogoModule } from '@shared/logo/logo.module';
     LogoModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterTestingModule,
   ],
   exports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { LogoModule } from '@shared/logo/logo.module';
     LogoModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterTestingModule,
   ],
 })
 export class TestModule {}
