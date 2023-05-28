@@ -1,0 +1,114 @@
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.sidebar__open]="isSidebarOpen">
+    <app-sidebar></app-sidebar>
+  </aside>
+  <div class="layout__container">
+    <!-- Header -->
+    <header class="header">
+      <app-header (menuClicked)="toggleSidebar()"></app-header>
+    </header>
+    <main class="layout__content overflow-y-auto">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ullam
+        sunt ea, nostrum quasi recusandae nam adipisci dolores suscipit
+        praesentium in consectetur tempore, voluptatem minus vitae soluta
+        corporis ab aspernatur.
+      </p>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
+<app-backdrop *ngIf="isSidebarOpen" (backdropClicked)="toggleSidebar()">
+</app-backdrop>
