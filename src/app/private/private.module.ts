@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { LogoModule } from '@shared/logo/logo.module';
 import { PrivateRoutingModule } from './private-routing.module';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -18,6 +19,12 @@ import { BackdropComponent } from './components/backdrop/backdrop.component';
     HeaderComponent,
     BackdropComponent,
   ],
-  imports: [CommonModule, PrivateRoutingModule, MatIconModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    PrivateRoutingModule,
+    MatIconModule,
+    MatButtonModule,
+    LogoModule,
+  ],
 })
 export class PrivateModule {}

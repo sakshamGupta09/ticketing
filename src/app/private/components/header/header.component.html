@@ -1,3 +1,16 @@
-<div class="flex items-center h-100" (click)="menuClickHandler()">
-  Toggle Menu
+<div class="flex items-center justify-between h-100">
+  <!-- Left -->
+  <div class="left">
+    <button
+      class="menu-bar"
+      (click)="menuClickHandler()"
+      mat-icon-button
+      color="primary"
+      aria-label="Expand side nav">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <!-- Right -->
+  <div class="right"></div>
+  <div>Menu</div>
 </div>
