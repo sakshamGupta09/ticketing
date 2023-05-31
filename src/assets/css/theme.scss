@@ -1,4 +1,4 @@
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
 
 @include mat.core();
 
@@ -13,7 +13,12 @@ $color-warn: mat.define-palette(mat.$red-palette);
 }
 
 $app-typography: mat.define-typography-config(
-  $font-family: "Montserrat",
+  $font-family: 'Montserrat',
+  $body-1:
+    mat.define-typography-level(
+      $font-weight: 500,
+      $font-size: 1rem,
+    ),
 );
 
 $app-theme: mat.define-light-theme(

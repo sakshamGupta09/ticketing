@@ -43,7 +43,7 @@ describe('LoginComponent', () => {
     });
 
     expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveAttribute('href', '/forgot-password');
+    expect(linkElement).toHaveAttribute('href', '/auth/forgot-password');
 
     await userEvent.click(linkElement);
     await waitFor(() => {

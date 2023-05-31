@@ -22,6 +22,6 @@ describe('ForgotPasswordEmailSentComponent', () => {
     const linkElement = screen.getByRole('link', { name: /Back to login/i });
 
     expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveAttribute('href', '/login');
+    expect(linkElement).toHaveAttribute('href', '/auth/login');
   });
 });

@@ -1,9 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IHttpResponse } from 'src/app/core/models/api-response';
-import { ILoginResponse } from '../models';
 import { environment } from '../../../environments/environment.development';
 import { catchError, throwError } from 'rxjs';
+import { ILoginData } from '../../core/models/login-response';
 
 @Injectable({ providedIn: 'root' })
 export class PublicService {
@@ -11,7 +11,7 @@ export class PublicService {
 
   public login(payload: { email: string; password: string }) {
     return this.http
-      .post<IHttpResponse<ILoginResponse>>(
+      .post<IHttpResponse<ILoginData>>(
         `${environment.API_BASE_URL}/auth/login`,
         payload
       )

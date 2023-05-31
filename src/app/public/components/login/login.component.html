@@ -33,7 +33,7 @@
           autofocus
           formControlName="email"
           matInput
-          placeholder="Enter your email"
+          placeholder="email@example.com"
           required
           name="email" />
         <mat-icon class="icon-light" matSuffix>mail_outline</mat-icon>
@@ -57,6 +57,7 @@
           matInput
           [type]="hidePassword ? 'password' : 'text'"
           required
+          placeholder="Password"
           name="password" />
         <button
           type="button"
@@ -80,7 +81,7 @@
       <div class="text-right">
         <a
           class="text-sm font-bold text-grey spacing-wide"
-          routerLink="/forgot-password">
+          routerLink="/auth/forgot-password">
           Forgot Password ?
         </a>
       </div>

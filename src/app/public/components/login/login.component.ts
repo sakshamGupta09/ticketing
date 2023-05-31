@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 import { PublicService } from '../../services/public.service';
 import { IHttpErrorResponse } from 'src/app/core/models/api-response';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { ILoginData } from 'src/app/core/models/login-response';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +23,12 @@ export class LoginComponent implements OnInit {
 
   public errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private service: PublicService) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: PublicService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -51,7 +59,7 @@ export class LoginComponent implements OnInit {
 
     this.service.login(this.form.value).subscribe({
       next: (response) => {
-        this.postLoginSuccess();
+        this.postLoginSuccess(response.data);
         this.isLoading = false;
       },
       error: (error: IHttpErrorResponse) => {
@@ -61,5 +69,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  private postLoginSuccess(): void {}
+  private postLoginSuccess(data: ILoginData): void {
+    this.authService.setLoginData(data);
+    this.router.navigate(['/app'], { replaceUrl: true });
+  }
 }

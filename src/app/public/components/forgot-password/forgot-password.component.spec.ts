@@ -36,7 +36,7 @@ describe('ForgotPasswordComponent', () => {
     const link = screen.getByRole('link', { name: /back to login/i });
 
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', '/login');
+    expect(link).toHaveAttribute('href', '/auth/login');
   });
 
   test('it is possible to fill in a form and verify error messages', async () => {
