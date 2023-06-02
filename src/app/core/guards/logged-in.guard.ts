@@ -12,5 +12,5 @@ export const loggedInGuard: CanActivateFn = () => {
     return true;
   }
 
-  return router.parseUrl('/app');
+  return router.parseUrl('/app/dashboard');
 };

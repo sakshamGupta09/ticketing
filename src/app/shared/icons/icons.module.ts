@@ -4,7 +4,12 @@ import {
   FaIconLibrary,
 } from '@fortawesome/angular-fontawesome';
 
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleNotch,
+  faCircleInfo,
+  faCircleCheck,
+  faCircleXmark,
+} from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [],
@@ -13,6 +18,6 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons';
 })
 export class IconsModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faHouse);
+    library.addIcons(faCircleNotch, faCircleCheck, faCircleInfo, faCircleXmark);
   }
 }

@@ -9,6 +9,7 @@
     padding: 0.5rem 0.75rem;
     margin-bottom: 0.5rem;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
       color: #fff;
@@ -16,7 +17,8 @@
   }
 
   &__item:has(a.active) {
-    color: var(--colorPrimary);
+    color: #fff;
     border-color: var(--colorPrimary);
+    background-color: #59667d;
   }
 }

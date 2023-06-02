@@ -5,7 +5,7 @@ import { PublicService } from '../../services/public.service';
 import { IHttpErrorResponse } from 'src/app/core/models/api-response';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ILoginData } from 'src/app/core/models/login-response';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private service: PublicService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +72,8 @@ export class LoginComponent implements OnInit {
 
   private postLoginSuccess(data: ILoginData): void {
     this.authService.setLoginData(data);
-    this.router.navigate(['/app'], { replaceUrl: true });
+    const redirectUrl =
+      this.route.snapshot.queryParams['redirectUrl'] || '/app/dashboard';
+    this.router.navigate([redirectUrl], { replaceUrl: true });
   }
 }
