@@ -1,0 +1,22 @@
+.menu {
+  &__item {
+    color: rgba(233, 233, 233, 0.8);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: 0.8px;
+    border-left: 2px solid transparent;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  &__item:has(a.active) {
+    color: var(--colorPrimary);
+    border-color: var(--colorPrimary);
+  }
+}

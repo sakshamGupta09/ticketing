@@ -2,3 +2,17 @@
 <div class="text-center">
   <app-logo [fontSizeClass]="'text-2xl'"></app-logo>
 </div>
+
+<!-- Menu items -->
+<ul class="mt-md menu">
+  <ng-container *ngFor="let link of menuItems; trackBy: trackByFn">
+    <li class="menu__item list-style-none">
+      <a
+        [routerLink]="[link.url]"
+        class="flex items-center gap-2 text-decoration-none current-color">
+        <mat-icon>{{ link.icon }}</mat-icon>
+        <span class="uppercase">{{ link.name }}</span>
+      </a>
+    </li>
+  </ng-container>
+</ul>
