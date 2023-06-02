@@ -7,9 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    pathMatch: 'full',
     canActivateChild: [authGuard],
-    children: [],
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
+    ],
   },
 ];
 

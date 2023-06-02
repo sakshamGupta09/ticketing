@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ILoginData } from 'src/app/core/models/login-response';
-import { ISidebarLink } from 'src/app/core/models/sidebar-link';
-import { AuthService } from 'src/app/core/services/auth.service';
-import SIDEBAR_LINKS_BY_ROLE from 'src/app/core/utils/sidebar-role-mapping';
+import { ILoginData } from '../../../core/models/login-response';
+import { ISidebarLink } from '../../../core/models/sidebar-link';
+import { AuthService } from '../../../core/services/auth.service';
+import SIDEBAR_LINKS_BY_ROLE from '../../../core/utils/sidebar-role-mapping';
 
 @Component({
   selector: 'app-sidebar',
