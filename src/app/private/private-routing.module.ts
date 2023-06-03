@@ -23,6 +23,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./users/users.module').then((m) => m.UsersModule),
       },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard',
+      },
     ],
   },
 ];

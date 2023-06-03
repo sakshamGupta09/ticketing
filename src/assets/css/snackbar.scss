@@ -1,0 +1,20 @@
+.mdc-snackbar__surface {
+  background-color: inherit !important;
+}
+
+.mdc-snackbar__label {
+  font-size: 1rem !important;
+  letter-spacing: 1px !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+}
+
+.snackbar {
+  &--success {
+    background-color: #4caf50;
+  }
+
+  &--error {
+    background-color: #d32f2f;
+  }
+}

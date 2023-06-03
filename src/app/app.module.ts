@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -19,6 +21,7 @@ import { AppComponent } from './app.component';
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

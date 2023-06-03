@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ILoginData } from '../models/login-response';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ export class AuthService {
 
   readonly localStorageKey = 'authData';
 
-  constructor() {
+  constructor(private router: Router) {
     this.setAuthDataFromCache();
   }
 
@@ -27,5 +28,12 @@ export class AuthService {
   public setLoginData(authData: ILoginData): void {
     this.loginData = authData;
     localStorage.setItem(this.localStorageKey, JSON.stringify(authData));
+  }
+
+  public logoutUser(): void {
+    const redirectUrl = this.router.url;
+    this.loginData = null;
+    localStorage.removeItem(this.localStorageKey);
+    this.router.navigateByUrl(`/auth/login?redirectUrl=${redirectUrl}`);
   }
 }
