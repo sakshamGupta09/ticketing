@@ -15,9 +15,13 @@ export class AuthService {
   }
 
   private setAuthDataFromCache(): void {
-    let authData = localStorage.getItem(this.localStorageKey);
-    if (authData) {
-      this.loginData = JSON.parse(authData);
+    try {
+      let authData = localStorage.getItem(this.localStorageKey);
+      if (authData) {
+        this.loginData = JSON.parse(authData);
+      }
+    } catch (error) {
+      this.loginData = null;
     }
   }
 

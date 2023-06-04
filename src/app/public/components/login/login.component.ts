@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ERROR_MESSAGES from '../../../core/constants/form-errors';
 import { PublicService } from '../../services/public.service';
-import { IHttpErrorResponse } from 'src/app/core/models/api-response';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { ILoginData } from 'src/app/core/models/login-response';
+import { IHttpErrorResponse } from '../../../core/models/api-response';
+import { AuthService } from '../../../core/services/auth.service';
+import { ILoginData } from '../../../core/models/login-response';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
