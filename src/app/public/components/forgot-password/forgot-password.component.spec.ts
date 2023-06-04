@@ -140,8 +140,8 @@ describe('ForgotPasswordComponent', () => {
       providers: [{ provide: PublicService, useValue: mockService }],
       declarations: [ForgotPasswordEmailSentComponent],
       routes: [
-        { path: 'forgot-password', component: ForgotPasswordComponent },
-        { path: 'email-sent', component: ForgotPasswordEmailSentComponent },
+        { path: 'auth/forgot-password', component: ForgotPasswordComponent },
+        { path: 'auth/email-sent', component: ForgotPasswordEmailSentComponent },
       ],
     });
 

@@ -51,7 +51,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.service.sendResetPasswordMail(this.form.value.email).subscribe({
       next: (response) => {
         this.isLoading = false;
-        this.router.navigate(['/email-sent']);
+        this.router.navigate(['/auth/email-sent']);
       },
       error: (error) => {
         this.isLoading = false;

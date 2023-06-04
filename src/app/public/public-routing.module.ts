@@ -17,22 +17,18 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [loggedInGuard],
   },
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent,
-    canActivate: [loggedInGuard],
   },
   {
     path: 'reset-password/:authToken',
     component: ResetPasswordComponent,
-    canActivate: [loggedInGuard],
   },
   {
     path: 'email-sent',
     component: ForgotPasswordEmailSentComponent,
-    canActivate: [loggedInGuard],
   },
   {
     path: '**',

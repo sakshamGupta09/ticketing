@@ -10,6 +10,7 @@ import { PublicService } from '../../services/public.service';
 import { of, throwError } from 'rxjs';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { Router } from '@angular/router';
+import { DashboardComponent } from '../../../private/dashboard/components/dashboard/dashboard.component';
 
 describe('LoginComponent', () => {
   test('it should render email, password fields and submit button', async () => {
@@ -31,7 +32,7 @@ describe('LoginComponent', () => {
       imports: [TestModule],
       routes: [
         { path: '', component: LoginComponent },
-        { path: 'forgot-password', component: ForgotPasswordComponent },
+        { path: 'auth/forgot-password', component: ForgotPasswordComponent },
       ],
     });
 
@@ -147,6 +148,7 @@ describe('LoginComponent', () => {
           useValue: mockLoginService,
         },
       ],
+      routes: [{ path: 'app/dashboard', component: DashboardComponent }],
     });
 
     const submitControl = screen.getByRole('button', { name: /login/i });
@@ -157,11 +159,9 @@ describe('LoginComponent', () => {
       password: '123456',
     });
 
-    detectChanges();
+    await userEvent.click(submitControl);
 
-    userEvent.click(submitControl);
-
-    await waitFor(() => {
+    waitFor(() => {
       expect(loginService.login).toHaveBeenCalledTimes(1);
       expect(screen.getByRole('alert')).toBeInTheDocument();
       expect(screen.getByRole('alert')).toHaveTextContent(
