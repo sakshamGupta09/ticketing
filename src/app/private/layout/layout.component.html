@@ -1,11 +1,14 @@
 <div class="layout">
   <!-- Sidebar -->
-  <aside class="sidebar" [class.sidebar__open]="isSidebarOpen">
+  <aside
+    class="sidebar"
+    [class.sidebar--open]="isSidebarOpen"
+    role="presentation">
     <app-sidebar></app-sidebar>
   </aside>
   <div class="layout__container">
     <!-- Header -->
-    <header class="header">
+    <header class="header" role="banner">
       <app-header (menuClicked)="toggleSidebar()"></app-header>
     </header>
     <main class="layout__content overflow-y-auto">
