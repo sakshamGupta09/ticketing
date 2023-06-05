@@ -41,3 +41,9 @@ body {
   letter-spacing: 0.8px;
   margin-bottom: 1rem;
 }
+
+.table__container {
+  min-height: 120px;
+  overflow: auto;
+  background-color: white;
+}

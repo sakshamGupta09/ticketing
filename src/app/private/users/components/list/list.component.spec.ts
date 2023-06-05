@@ -86,4 +86,27 @@ describe('ListComponent', () => {
       );
     });
   });
+
+  it('should display no data message if no users exist', async () => {
+    const mockUsersService = createMock(UsersService);
+    mockUsersService.getUsers.mockImplementation(() =>
+      of({ data: { users: [] } })
+    );
+
+    await render(ListComponent, {
+      imports: [TestModule],
+      componentProviders: [
+        { provide: UsersService, useValue: mockUsersService },
+      ],
+    });
+
+    const [thead, tbody] = screen.getAllByRole('rowgroup');
+    expect(thead).toBeInTheDocument();
+    expect(within(thead).getAllByRole('columnheader')).toHaveLength(
+      USER_TABLE_COLUMNS.length
+    );
+    expect(within(tbody).queryByRole('row')).toBeNull();
+
+    expect(screen.getByText('No Data available')).toBeInTheDocument();
+  });
 });
