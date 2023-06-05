@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
-import { IUser } from 'src/app/core/models/user';
+import { IUser } from '../../../../core/models/user';
 import USER_TABLE_COLUMNS from '../../constants/users-table-columns';
-import { ROLES_MAP } from 'src/app/core/models/roles';
+import { ROLES_MAP } from '../../../../core/models/roles';
 
 @Component({
   selector: 'app-list',

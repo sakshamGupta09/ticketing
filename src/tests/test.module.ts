@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconsModule } from '@shared/icons/icons.module';
 import { AlertModule } from '@shared/alert/alert.module';
 import { LogoModule } from '@shared/logo/logo.module';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [],
@@ -27,6 +28,7 @@ import { LogoModule } from '@shared/logo/logo.module';
     FormsModule,
     ReactiveFormsModule,
     RouterTestingModule,
+    MatTableModule,
   ],
   exports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { LogoModule } from '@shared/logo/logo.module';
     FormsModule,
     ReactiveFormsModule,
     RouterTestingModule,
+    MatTableModule,
   ],
 })
 export class TestModule {}
