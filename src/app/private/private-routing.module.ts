@@ -12,7 +12,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         canActivate: [
-          checkRoleAccess([Roles.ADMIN, Roles.AGENT, Roles.CUSTOMER]),
+          checkRoleAccess([Roles.ADMIN, Roles.AGENT, Roles.EMPLOYEE]),
         ],
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),

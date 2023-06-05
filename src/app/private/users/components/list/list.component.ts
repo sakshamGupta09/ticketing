@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
+import { IUser } from 'src/app/core/models/user';
+import USER_TABLE_COLUMNS from '../../constants/users-table-columns';
+import { ROLES_MAP } from 'src/app/core/models/roles';
 
 @Component({
   selector: 'app-list',
@@ -7,6 +10,14 @@ import { UsersService } from '../../services/users.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
+  public users: IUser[] = [];
+
+  public isLoading: boolean = false;
+
+  public columns: string[] = USER_TABLE_COLUMNS;
+
+  readonly rolesMapping = ROLES_MAP;
+
   constructor(private service: UsersService) {}
 
   ngOnInit(): void {
@@ -14,8 +25,15 @@ export class ListComponent implements OnInit {
   }
 
   private getUsers(): void {
+    this.isLoading = true;
     this.service.getUsers().subscribe({
-      next: (response) => {},
+      next: (response) => {
+        this.isLoading = false;
+        this.users = response.data.users;
+      },
+      error: (err) => {
+        this.isLoading = false;
+      },
     });
   }
 }

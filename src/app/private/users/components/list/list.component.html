@@ -1,0 +1,41 @@
+<h1 class="page-title">Users</h1>
+
+<!-- Table -->
+<table mat-table [dataSource]="users" class="mat-elevation-z2">
+  <!-- ID -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+  </ng-container>
+
+  <!-- Name -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let row" class="titlecase">
+      {{ row.first_name + ' ' + row.last_name }}
+    </td>
+  </ng-container>
+
+  <!-- Email -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+  </ng-container>
+
+  <!-- Phone -->
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef>Contact</th>
+    <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
+  </ng-container>
+
+  <!-- Role -->
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef>Role</th>
+    <td mat-cell *matCellDef="let row" class="uppercase">
+      {{ rolesMapping[row.role_id] }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns"></tr>
+</table>
