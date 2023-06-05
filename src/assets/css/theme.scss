@@ -20,6 +20,18 @@ $app-typography: mat.define-typography-config(
       $font-size: 1rem,
       $letter-spacing: 0.6px,
     ),
+  $body-2:
+    mat.define-typography-level(
+      $font-weight: 500,
+      $font-size: 0.875rem,
+      $letter-spacing: 0.6px,
+    ),
+  $subtitle-2:
+    mat.define-typography-level(
+      $font-weight: 600,
+      $font-size: 0.875rem,
+      $letter-spacing: 0.6px,
+    ),
 );
 
 $app-theme: mat.define-light-theme(
