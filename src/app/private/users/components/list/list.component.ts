@@ -3,6 +3,7 @@ import { UsersService } from '../../services/users.service';
 import { IUser } from '../../../../core/models/user';
 import USER_TABLE_COLUMNS from '../../constants/users-table-columns';
 import { ROLES_MAP } from '../../../../core/models/roles';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -18,7 +19,13 @@ export class ListComponent implements OnInit {
 
   readonly rolesMapping = ROLES_MAP;
 
-  constructor(private service: UsersService) {}
+  public isDrawerVisible: boolean = false;
+
+  constructor(
+    private service: UsersService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.getUsers();
@@ -35,5 +42,10 @@ export class ListComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  public addClickHandler(): void {
+    this.isDrawerVisible = true;
+    this.router.navigate(['./add'], { relativeTo: this.route });
   }
 }

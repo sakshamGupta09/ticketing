@@ -1,0 +1,28 @@
+.drawer {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: var(--drawerWidth);
+  background-color: white;
+  translate: 100%;
+  transition: translate 0.3s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+  z-index: 6;
+
+  &--open {
+    translate: 0;
+  }
+
+  &-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(24, 50, 71, 0.6);
+    z-index: 5;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .drawer {
+    width: 100%;
+  }
+}

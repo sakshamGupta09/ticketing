@@ -1,6 +1,15 @@
-<h1 class="page-title">Users</h1>
+<div class="flex items-center justify-between">
+  <h1 class="page-title">Users</h1>
+  <button
+    mat-stroked-button
+    color="primary"
+    class="font-mediumbold"
+    (click)="addClickHandler()">
+    ADD USER
+  </button>
+</div>
 
-<div class="table__container mat-elevation-z2">
+<div class="table__container mt-xs mat-elevation-z2">
   <!-- Table -->
 
   <table mat-table [dataSource]="users">
@@ -43,7 +52,17 @@
   </table>
 
   <!-- No data -->
-  <p *ngIf="!isLoading && users.length === 0" class="p-md font-semibold text-sm">
+  <p
+    *ngIf="!isLoading && users.length === 0"
+    class="p-md font-semibold text-sm">
     No Data available
   </p>
 </div>
+
+<!-- Loader -->
+<app-loader *ngIf="isLoading"></app-loader>
+
+<!-- Drawer -->
+<app-drawer [isVisible]="isDrawerVisible">
+  <router-outlet></router-outlet>
+</app-drawer>
