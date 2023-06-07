@@ -6,6 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { LoaderModule } from '@shared/loader/loader.module';
 import { MatButtonModule } from '@angular/material/button';
 import { DrawerModule } from '@shared/drawer/drawer.module';
+import { IconsModule } from '@shared/icons/icons.module';
 
 import { UsersRoutingModule } from './users-routing.module';
 import { ListComponent } from './components/list/list.component';
@@ -22,6 +23,7 @@ import { AddComponent } from './components/add/add.component';
     MatTableModule,
     LoaderModule,
     MatButtonModule,
+    IconsModule,
     DrawerModule,
   ],
   providers: [UsersService],

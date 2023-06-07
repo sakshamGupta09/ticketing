@@ -3,7 +3,7 @@ import { UsersService } from '../../services/users.service';
 import { IUser } from '../../../../core/models/user';
 import USER_TABLE_COLUMNS from '../../constants/users-table-columns';
 import { ROLES_MAP } from '../../../../core/models/roles';
-import { ActivatedRoute, Router } from '@angular/router';
+import { componentTypes } from '../../models';
 
 @Component({
   selector: 'app-list',
@@ -19,13 +19,14 @@ export class ListComponent implements OnInit {
 
   readonly rolesMapping = ROLES_MAP;
 
-  public isDrawerVisible: boolean = false;
+  public idDrawerVisible: boolean = false;
 
-  constructor(
-    private service: UsersService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  public drawerVisibilityBooleans: Record<componentTypes, boolean> = {
+    ADD: false,
+    EDIT: false,
+  };
+
+  constructor(private service: UsersService) {}
 
   ngOnInit(): void {
     this.getUsers();
@@ -45,7 +46,12 @@ export class ListComponent implements OnInit {
   }
 
   public addClickHandler(): void {
-    this.isDrawerVisible = true;
-    this.router.navigate(['./add'], { relativeTo: this.route });
+    this.idDrawerVisible = true;
+    this.drawerVisibilityBooleans.ADD = true;
+  }
+
+  public closeClickHandler(type: componentTypes): void {
+    this.drawerVisibilityBooleans[type] = false;
+    this.idDrawerVisible = false;
   }
 }

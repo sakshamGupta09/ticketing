@@ -62,7 +62,9 @@
 <!-- Loader -->
 <app-loader *ngIf="isLoading"></app-loader>
 
-<!-- Drawer -->
-<app-drawer [isVisible]="isDrawerVisible">
-  <router-outlet></router-outlet>
+<!-- Add user -->
+<app-drawer [isVisible]="idDrawerVisible">
+  <app-add
+    *ngIf="drawerVisibilityBooleans.ADD"
+    (closeClicked)="closeClickHandler($event)"></app-add>
 </app-drawer>

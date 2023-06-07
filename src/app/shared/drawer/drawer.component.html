@@ -2,7 +2,9 @@
 <div
   role="complementary"
   class="drawer mat-elevation-z6"
-  [class.drawer--open]="isVisible"></div>
+  [class.drawer--open]="isVisible">
+  <ng-content></ng-content>
+</div>
 
 <!-- Backdrop -->
 <div role="presentation" class="drawer-overlay" *ngIf="isVisible"></div>

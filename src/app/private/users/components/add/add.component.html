@@ -1,1 +1,27 @@
-<p>add works!</p>
+<app-drawer-content (closeClicked)="closeClickHandler()">
+  <!-- Title -->
+  <ng-container title>Add new user</ng-container>
+
+  <!-- Body -->
+  <ng-container body></ng-container>
+
+  <!-- Footer -->
+  <ng-container footer>
+    <div class="flex justify-center">
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        mat-raised-button
+        color="primary"
+        class="font-bold text-white">
+        <span [hidden]="isLoading">ADD USER</span>
+        <fa-icon
+          [hidden]="!isLoading"
+          icon="circle-notch"
+          class="color-theme"
+          [spin]="true"
+          size="xl"></fa-icon>
+      </button>
+    </div>
+  </ng-container>
+</app-drawer-content>

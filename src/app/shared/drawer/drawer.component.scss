@@ -6,7 +6,7 @@
   width: var(--drawerWidth);
   background-color: white;
   translate: 100%;
-  transition: translate 0.3s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+  transition: translate 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   z-index: 6;
 
   &--open {

@@ -1,0 +1,25 @@
+<div class="drawer__content h-full flex flex-col">
+  <!-- Header -->
+  <div class="drawer__header flex justify-between gap-2 items-center">
+    <h2 class="drawer__title">
+      <ng-content select="[title]"></ng-content>
+    </h2>
+
+    <button
+      mat-icon-button
+      aria-label="Close drawer"
+      (click)="closeClickHandler()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Body -->
+  <div class="drawer__body flex-grow overflow-y-auto">
+    <ng-content select="[body]"></ng-content>
+  </div>
+
+  <!-- Footer -->
+  <div class="drawer__footer">
+    <ng-content select="[footer]"></ng-content>
+  </div>
+</div>
