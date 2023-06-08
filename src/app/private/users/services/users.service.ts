@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { IHttpResponse } from 'src/app/core/models/api-response';
 import { IUser } from 'src/app/core/models/user';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UsersService {
   constructor(private http: HttpClient) {}
 

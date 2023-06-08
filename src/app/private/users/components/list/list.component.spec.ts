@@ -1,10 +1,4 @@
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  within,
-} from '@testing-library/angular';
+import { render, screen, within } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { TestBed } from '@angular/core/testing';
 import { createMock } from '@testing-library/angular/jest-utils';
@@ -16,9 +10,11 @@ import { UsersService } from '../../services/users.service';
 import { of } from 'rxjs';
 import USERS_MOCK from '../../../../../tests/mocks/users';
 import USER_TABLE_COLUMNS from '../../constants/users-table-columns';
+import { DrawerComponent } from '@shared/drawer/drawer.component';
+import { AddComponent } from '../add/add.component';
 
 describe('ListComponent', () => {
-  it('should render a page heading', async () => {
+  test('should render a page heading', async () => {
     const mockUserService = createMock(UsersService);
     mockUserService.getUsers.mockImplementation(() =>
       of({ data: { users: USERS_MOCK } })
@@ -37,7 +33,7 @@ describe('ListComponent', () => {
     );
   });
 
-  it('it should render list of users in a table', async () => {
+  test('it should render list of users in a table', async () => {
     const mockUserService = createMock(UsersService);
     mockUserService.getUsers.mockImplementation(() =>
       of({ data: { users: USERS_MOCK } })
@@ -87,7 +83,7 @@ describe('ListComponent', () => {
     });
   });
 
-  it('should display no data message if no users exist', async () => {
+  test('should display no data message if no users exist', async () => {
     const mockUsersService = createMock(UsersService);
     mockUsersService.getUsers.mockImplementation(() =>
       of({ data: { users: [] } })
@@ -108,5 +104,55 @@ describe('ListComponent', () => {
     expect(within(tbody).queryByRole('row')).toBeNull();
 
     expect(screen.getByText('No Data available')).toBeInTheDocument();
+  });
+
+  test('it should render the add user button', async () => {
+    const mockUserService = createMock(UsersService);
+    mockUserService.getUsers.mockImplementation(() =>
+      of({ data: { users: USERS_MOCK } })
+    );
+
+    await render(ListComponent, {
+      declarations: [DrawerComponent],
+      imports: [TestModule],
+      componentProviders: [
+        { provide: UsersService, useValue: mockUserService },
+      ],
+    });
+
+    expect(
+      screen.getByRole('button', { name: /add user/i })
+    ).toBeInTheDocument();
+  });
+
+  test('clicking add user button should open the drawer', async () => {
+    const mockUserService = createMock(UsersService);
+    mockUserService.getUsers.mockImplementation(() =>
+      of({ data: { users: USERS_MOCK } })
+    );
+
+    const { fixture, detectChanges } = await render(ListComponent, {
+      declarations: [DrawerComponent, AddComponent],
+      imports: [TestModule],
+      componentProviders: [
+        { provide: UsersService, useValue: mockUserService },
+      ],
+    });
+
+    const addUserBtn = screen.getByRole('button', { name: /add user/i });
+
+    await userEvent.click(addUserBtn);
+
+    detectChanges();
+
+    expect(screen.getByRole('complementary')).toBeInTheDocument();
+    expect(screen.getByRole('complementary')).toHaveClass('drawer--open');
+
+    expect(screen.getByRole('presentation')).toBeInTheDocument();
+    expect(screen.getByRole('presentation')).toHaveClass('drawer-overlay');
+
+    expect(
+      screen.getByRole('heading', { name: /Add new user/i })
+    ).toBeInTheDocument();
   });
 });

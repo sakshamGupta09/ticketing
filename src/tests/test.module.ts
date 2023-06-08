@@ -12,6 +12,7 @@ import { IconsModule } from '@shared/icons/icons.module';
 import { AlertModule } from '@shared/alert/alert.module';
 import { LogoModule } from '@shared/logo/logo.module';
 import { MatTableModule } from '@angular/material/table';
+import { DrawerModule } from '@shared/drawer/drawer.module';
 
 @NgModule({
   declarations: [],
@@ -44,6 +45,7 @@ import { MatTableModule } from '@angular/material/table';
     ReactiveFormsModule,
     RouterTestingModule,
     MatTableModule,
+    DrawerModule,
   ],
 })
 export class TestModule {}

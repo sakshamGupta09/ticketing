@@ -11,7 +11,6 @@ import { IconsModule } from '@shared/icons/icons.module';
 import { UsersRoutingModule } from './users-routing.module';
 import { ListComponent } from './components/list/list.component';
 
-import { UsersService } from './services/users.service';
 import { AddComponent } from './components/add/add.component';
 
 @NgModule({
@@ -26,6 +25,5 @@ import { AddComponent } from './components/add/add.component';
     IconsModule,
     DrawerModule,
   ],
-  providers: [UsersService],
 })
 export class UsersModule {}
