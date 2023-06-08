@@ -1,6 +1,8 @@
 <div class="drawer__content h-full flex flex-col">
   <!-- Header -->
-  <div class="drawer__header flex justify-between gap-2 items-center">
+  <div
+    class="drawer__header flex justify-between gap-2 items-center"
+    data-testid="drawer-header">
     <h2 class="drawer__title">
       <ng-content select="[title]"></ng-content>
     </h2>
@@ -14,12 +16,12 @@
   </div>
 
   <!-- Body -->
-  <div class="drawer__body flex-grow overflow-y-auto">
+  <div class="drawer__body flex-grow overflow-y-auto" data-testid="drawer-body">
     <ng-content select="[body]"></ng-content>
   </div>
 
   <!-- Footer -->
-  <div class="drawer__footer">
+  <div class="drawer__footer" data-testid="drawer-footer">
     <ng-content select="[footer]"></ng-content>
   </div>
 </div>
