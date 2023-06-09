@@ -7,7 +7,7 @@ import { TestModule } from '../../../../../tests/test.module';
 
 import { ListComponent } from './list.component';
 import { UsersService } from '../../services/users.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import USERS_MOCK from '../../../../../tests/mocks/users';
 import USER_TABLE_COLUMNS from '../../constants/users-table-columns';
 import { DrawerComponent } from '@shared/drawer/drawer.component';
@@ -106,6 +106,20 @@ describe('ListComponent', () => {
     expect(screen.getByText('No Data available')).toBeInTheDocument();
   });
 
+  test('it should not render the spinner if API throws an error', async () => {
+    const mockUsersService = createMock(UsersService);
+    mockUsersService.getUsers.mockImplementation(() => throwError(() => {}));
+
+    await render(ListComponent, {
+      imports: [TestModule],
+      componentProviders: [
+        { provide: UsersService, useValue: mockUsersService },
+      ],
+    });
+
+    expect(screen.queryByRole('progressbar')).toBeNull();
+  });
+
   test('it should render the add user button', async () => {
     const mockUserService = createMock(UsersService);
     mockUserService.getUsers.mockImplementation(() =>
@@ -154,5 +168,34 @@ describe('ListComponent', () => {
     expect(
       screen.getByRole('heading', { name: /Add new user/i })
     ).toBeInTheDocument();
+  });
+
+  test('clicking close button should close the drawer', async () => {
+    const mockUserService = createMock(UsersService);
+    mockUserService.getUsers.mockImplementation(() =>
+      of({ data: { users: USERS_MOCK } })
+    );
+
+    const { fixture, detectChanges } = await render(ListComponent, {
+      declarations: [DrawerComponent, AddComponent],
+      imports: [TestModule],
+      componentProviders: [
+        { provide: UsersService, useValue: mockUserService },
+      ],
+    });
+
+    const addUserBtn = screen.getByRole('button', { name: /add user/i });
+    await userEvent.click(addUserBtn);
+    detectChanges();
+
+    fixture.componentInstance.closeClickHandler('ADD');
+    detectChanges();
+
+    expect(screen.getByRole('complementary')).toBeInTheDocument();
+    expect(screen.getByRole('complementary')).not.toHaveClass('drawer--open');
+
+    expect(screen.queryByRole('presentation')).toBeNull();
+
+    expect(screen.queryByRole('heading', { name: /Add new user/i })).toBeNull();
   });
 });

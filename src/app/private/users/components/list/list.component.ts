@@ -19,7 +19,7 @@ export class ListComponent implements OnInit {
 
   readonly rolesMapping = ROLES_MAP;
 
-  public idDrawerVisible: boolean = false;
+  public isDrawerVisible: boolean = false;
 
   public drawerVisibilityBooleans: Record<componentTypes, boolean> = {
     ADD: false,
@@ -46,12 +46,12 @@ export class ListComponent implements OnInit {
   }
 
   public addClickHandler(): void {
-    this.idDrawerVisible = true;
+    this.isDrawerVisible = true;
     this.drawerVisibilityBooleans.ADD = true;
   }
 
   public closeClickHandler(type: componentTypes): void {
     this.drawerVisibilityBooleans[type] = false;
-    this.idDrawerVisible = false;
+    this.isDrawerVisible = false;
   }
 }
