@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./drawer.component.scss'],
 })
 export class DrawerComponent {
-  @Input() isVisible: boolean = false;
+  @Input() isVisible = false;
 }

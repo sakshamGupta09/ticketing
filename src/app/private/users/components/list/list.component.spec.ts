@@ -1,6 +1,5 @@
 import { render, screen, within } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
-import { TestBed } from '@angular/core/testing';
 import { createMock } from '@testing-library/angular/jest-utils';
 
 import { TestModule } from '../../../../../tests/test.module';
@@ -46,10 +45,9 @@ describe('ListComponent', () => {
       ],
     });
 
-    const usersService = TestBed.inject(UsersService);
     expect(screen.getByRole('table')).toBeInTheDocument();
 
-    const [thead, tbody, tfooter] = screen.getAllByRole('rowgroup');
+    const [thead, tbody] = screen.getAllByRole('rowgroup');
 
     // Thead
     const headerRow = within(thead).getByRole('row');
@@ -108,7 +106,9 @@ describe('ListComponent', () => {
 
   test('it should not render the spinner if API throws an error', async () => {
     const mockUsersService = createMock(UsersService);
-    mockUsersService.getUsers.mockImplementation(() => throwError(() => {}));
+    mockUsersService.getUsers.mockImplementation(() =>
+      throwError(() => ({ statusCode: 400, message: 'Bad request' }))
+    );
 
     await render(ListComponent, {
       imports: [TestModule],
@@ -145,7 +145,7 @@ describe('ListComponent', () => {
       of({ data: { users: USERS_MOCK } })
     );
 
-    const { fixture, detectChanges } = await render(ListComponent, {
+    const { detectChanges } = await render(ListComponent, {
       declarations: [DrawerComponent, AddComponent],
       imports: [TestModule],
       componentProviders: [

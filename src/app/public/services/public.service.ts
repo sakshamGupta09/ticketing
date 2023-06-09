@@ -22,7 +22,7 @@ export class PublicService {
 
   public sendResetPasswordMail(email: string) {
     return this.http
-      .post<IHttpResponse<{}>>(
+      .post<IHttpResponse<object>>(
         `${environment.API_BASE_URL}/auth/forgotPassword`,
         {
           email,
@@ -35,7 +35,7 @@ export class PublicService {
 
   public changePassword(authToken: string, newPassword: string) {
     return this.http
-      .post<IHttpResponse<{}>>(
+      .post<IHttpResponse<object>>(
         `${environment.API_BASE_URL}/auth/resetPassword`,
         {
           token: authToken,

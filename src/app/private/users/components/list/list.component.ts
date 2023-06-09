@@ -13,13 +13,13 @@ import { componentTypes } from '../../models';
 export class ListComponent implements OnInit {
   public users: IUser[] = [];
 
-  public isLoading: boolean = false;
+  public isLoading = false;
 
   public columns: string[] = USER_TABLE_COLUMNS;
 
   readonly rolesMapping = ROLES_MAP;
 
-  public isDrawerVisible: boolean = false;
+  public isDrawerVisible = false;
 
   public drawerVisibilityBooleans: Record<componentTypes, boolean> = {
     ADD: false,
@@ -39,7 +39,7 @@ export class ListComponent implements OnInit {
         this.isLoading = false;
         this.users = response.data.users;
       },
-      error: (err) => {
+      error: () => {
         this.isLoading = false;
       },
     });

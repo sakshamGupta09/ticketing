@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
+import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 
 import { TestModule } from '../../../tests/test.module';

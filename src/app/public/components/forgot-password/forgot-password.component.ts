@@ -49,7 +49,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.isLoading = true;
 
     this.service.sendResetPasswordMail(this.form.value.email).subscribe({
-      next: (response) => {
+      next: () => {
         this.isLoading = false;
         this.router.navigate(['/auth/email-sent']);
       },

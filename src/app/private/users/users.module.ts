@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { LoaderModule } from '@shared/loader/loader.module';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,6 +28,11 @@ import { AddComponent } from './components/add/add.component';
     MatButtonModule,
     IconsModule,
     DrawerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class UsersModule {}

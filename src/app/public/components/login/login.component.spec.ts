@@ -140,7 +140,7 @@ describe('LoginComponent', () => {
       }))
     );
 
-    const { fixture, detectChanges } = await render(LoginComponent, {
+    const { fixture } = await render(LoginComponent, {
       imports: [TestModule],
       componentProviders: [
         {

@@ -158,8 +158,6 @@ describe('ResetPasswordComponent', () => {
       componentProviders: [{ provide: PublicService, useValue: mockService }],
     });
 
-    const service = TestBed.inject(PublicService);
-
     const newPasswordControl = screen.getByLabelText(/New Password/i);
     const confirmPasswordControl = screen.getByLabelText(/Confirm Password/i);
     const submitControl = screen.getByRole('button', {
@@ -191,8 +189,6 @@ describe('ResetPasswordComponent', () => {
       imports: [TestModule],
       componentProviders: [{ provide: PublicService, useValue: mockService }],
     });
-
-    const service = TestBed.inject(PublicService);
 
     const newPasswordControl = screen.getByLabelText(/New Password/i);
     const confirmPasswordControl = screen.getByLabelText(/Confirm Password/i);

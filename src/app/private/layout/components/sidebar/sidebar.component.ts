@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit {
     this.menuItems = SIDEBAR_LINKS_BY_ROLE[userRoleId];
   }
 
-  public trackByFn(index: number, item: ISidebarLink): number {
+  public trackByFn(index: number): number {
     return index;
   }
 }

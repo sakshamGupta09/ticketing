@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
+import { render, screen, waitFor } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { TestBed } from '@angular/core/testing';
 import { createMock } from '@testing-library/angular/jest-utils';

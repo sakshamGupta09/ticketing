@@ -6,11 +6,12 @@ import {
   HttpResponse,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, map, throwError, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { AuthService } from '../services/auth.service';
 import { SnackbarService } from '@shared/services/snackbar.service';
+import { ILoginData } from '../models/login-response';
 
 @Injectable({ providedIn: 'root' })
 export class httpInterceptor implements HttpInterceptor {
@@ -23,7 +24,7 @@ export class httpInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const authToken = this.authService.getLoginData()!.authToken;
+    const authToken = (this.authService.getLoginData() as ILoginData).authToken;
 
     // Add authorization
     const authReq = request.clone({

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   readonly formErrors = ERROR_MESSAGES;
 
-  public errorMessage: string = '';
+  public errorMessage = '';
 
   constructor(
     private fb: FormBuilder,

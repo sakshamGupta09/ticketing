@@ -21,7 +21,7 @@ export class ResetPasswordComponent implements OnInit {
 
   public hidePassword = true;
 
-  private authToken: string = '';
+  private authToken = '';
 
   public alertConfig: { type: AlertTypes; title: string };
 
