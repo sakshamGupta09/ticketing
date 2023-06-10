@@ -3,7 +3,64 @@
   <ng-container title>Add new user</ng-container>
 
   <!-- Body -->
-  <ng-container body></ng-container>
+  <ng-container body>
+    <form [formGroup]="form" novalidate autocomplete="off" spellcheck="false">
+      <!-- First name -->
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="John"
+          formControlName="firstName"
+          required />
+      </mat-form-field>
+
+      <!-- Last name -->
+      <mat-form-field appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Doe"
+          formControlName="lastName"
+          required />
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          placeholder="email@example.com"
+          formControlName="email"
+          required />
+      </mat-form-field>
+
+      <!-- Phone -->
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          type="tel"
+          matInput
+          placeholder="0000000000"
+          formControlName="phone"
+          required
+          maxlength="10" />
+      </mat-form-field>
+
+      <!-- Role -->
+      <mat-form-field appearance="outline">
+        <mat-label>Role id</mat-label>
+        <mat-select formControlName="roleId" name="role">
+          <mat-option *ngFor="let role of rolesList" [value]="role.id">
+            {{ role.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </ng-container>
 
   <!-- Footer -->
   <ng-container footer>
@@ -13,7 +70,8 @@
         [disabled]="isLoading"
         mat-raised-button
         color="primary"
-        class="font-bold text-white">
+        class="font-bold text-white"
+        (click)="onSubmit()">
         <span [hidden]="isLoading">ADD USER</span>
         <fa-icon
           [hidden]="!isLoading"
