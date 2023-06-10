@@ -5,30 +5,32 @@
   <!-- Body -->
   <ng-container body>
     <form [formGroup]="form" novalidate autocomplete="off" spellcheck="false">
-      <!-- First name -->
-      <mat-form-field appearance="outline">
-        <mat-label>First name</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="John"
-          formControlName="firstName"
-          required />
-      </mat-form-field>
+      <div class="flex gap-2">
+        <!-- First name -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>First name</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="John"
+            formControlName="firstName"
+            required />
+        </mat-form-field>
 
-      <!-- Last name -->
-      <mat-form-field appearance="outline">
-        <mat-label>Last name</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="Doe"
-          formControlName="lastName"
-          required />
-      </mat-form-field>
+        <!-- Last name -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Last name</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Doe"
+            formControlName="lastName"
+            required />
+        </mat-form-field>
+      </div>
 
       <!-- Email -->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="w-full">
         <mat-label>Email</mat-label>
         <input
           type="email"
@@ -39,8 +41,8 @@
       </mat-form-field>
 
       <!-- Phone -->
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Phone number</mat-label>
         <input
           type="tel"
           matInput
@@ -51,7 +53,7 @@
       </mat-form-field>
 
       <!-- Role -->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="w-full">
         <mat-label>Role id</mat-label>
         <mat-select formControlName="roleId" name="role">
           <mat-option *ngFor="let role of rolesList" [value]="role.id">

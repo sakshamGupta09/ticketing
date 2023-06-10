@@ -13,8 +13,6 @@ import { SidebarComponent } from './layout/components/sidebar/sidebar.component'
 import { HeaderComponent } from './layout/components/header/header.component';
 import { BackdropComponent } from './layout/components/backdrop/backdrop.component';
 
-import { httpInterceptorProviders } from '../core/interceptors';
-
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -30,6 +28,5 @@ import { httpInterceptorProviders } from '../core/interceptors';
     LogoModule,
     MatRippleModule,
   ],
-  providers: [httpInterceptorProviders],
 })
 export class PrivateModule {}

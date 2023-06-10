@@ -11,7 +11,6 @@ import { Observable, map, throwError, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { AuthService } from '../services/auth.service';
 import { SnackbarService } from '@shared/services/snackbar.service';
-import { ILoginData } from '../models/login-response';
 
 @Injectable({ providedIn: 'root' })
 export class httpInterceptor implements HttpInterceptor {
@@ -24,15 +23,26 @@ export class httpInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const authToken = (this.authService.getLoginData() as ILoginData).authToken;
+    const authToken = this.authService.getLoginData()?.authToken;
 
-    // Add authorization
-    const authReq = request.clone({
-      setHeaders: { Authorization: authToken },
-      url: environment.API_BASE_URL + request.url,
-    });
+    let authReq;
+
+    if (authToken) {
+      // Add authorization
+      authReq = request.clone({
+        setHeaders: { Authorization: authToken },
+        url: environment.API_BASE_URL + request.url,
+      });
+    } else {
+      authReq = request;
+    }
 
     // Handle response
+
+    if (!authToken) {
+      return next.handle(authReq);
+    }
+
     return next.handle(authReq).pipe(
       map((event) => {
         if (event instanceof HttpResponse) {
