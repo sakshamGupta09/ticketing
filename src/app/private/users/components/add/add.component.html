@@ -5,7 +5,7 @@
   <!-- Body -->
   <ng-container body>
     <form [formGroup]="form" novalidate autocomplete="off" spellcheck="false">
-      <div class="flex gap-2">
+      <div class="flex gap-4">
         <!-- First name -->
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>First name</mat-label>
@@ -15,6 +15,12 @@
             placeholder="John"
             formControlName="firstName"
             required />
+
+          <mat-error *ngIf="firstName.invalid && firstName.touched">
+            <ng-container *ngIf="firstName.errors?.['required']">
+              {{ formErrors.REQUIRED }}
+            </ng-container>
+          </mat-error>
         </mat-form-field>
 
         <!-- Last name -->
@@ -26,11 +32,17 @@
             placeholder="Doe"
             formControlName="lastName"
             required />
+
+          <mat-error *ngIf="lastName.invalid && lastName.touched">
+            <ng-container *ngIf="lastName.errors?.['required']">
+              {{ formErrors.REQUIRED }}
+            </ng-container>
+          </mat-error>
         </mat-form-field>
       </div>
 
       <!-- Email -->
-      <mat-form-field appearance="outline" class="w-full">
+      <mat-form-field appearance="outline" class="w-full mt-xs">
         <mat-label>Email</mat-label>
         <input
           type="email"
@@ -38,10 +50,19 @@
           placeholder="email@example.com"
           formControlName="email"
           required />
+
+        <mat-error *ngIf="email.invalid && email.touched">
+          <ng-container *ngIf="email.errors?.['required']">
+            {{ formErrors.REQUIRED }}
+          </ng-container>
+          <ng-container *ngIf="email.errors?.['email']">
+            {{ formErrors.INVALID_EMAIL }}
+          </ng-container>
+        </mat-error>
       </mat-form-field>
 
       <!-- Phone -->
-      <mat-form-field appearance="outline" class="w-full">
+      <mat-form-field appearance="outline" class="w-full mt-xs">
         <mat-label>Phone number</mat-label>
         <input
           type="tel"
@@ -50,16 +71,35 @@
           formControlName="phone"
           required
           maxlength="10" />
+
+        <mat-error *ngIf="phone.invalid && phone.touched">
+          <ng-container *ngIf="phone.errors?.['required']">
+            {{ formErrors.REQUIRED }}
+          </ng-container>
+          <ng-container
+            *ngIf="phone.errors?.['minlength'] || phone.errors?.['maxlength']">
+            {{ formErrors.INVALID_PHONE }}
+          </ng-container>
+        </mat-error>
       </mat-form-field>
 
       <!-- Role -->
-      <mat-form-field appearance="outline" class="w-full">
+      <mat-form-field appearance="outline" class="w-full mt-xs">
         <mat-label>Role id</mat-label>
-        <mat-select formControlName="roleId" name="role">
+        <mat-select
+          formControlName="roleId"
+          name="role"
+          placeholder="Select a role">
           <mat-option *ngFor="let role of rolesList" [value]="role.id">
             {{ role.label }}
           </mat-option>
         </mat-select>
+
+        <mat-error *ngIf="roleId.invalid && roleId.touched">
+          <ng-container *ngIf="roleId.errors?.['required']">
+            {{ formErrors.REQUIRED }}
+          </ng-container>
+        </mat-error>
       </mat-form-field>
     </form>
   </ng-container>
