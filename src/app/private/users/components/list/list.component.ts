@@ -26,6 +26,8 @@ export class ListComponent implements OnInit {
     EDIT: false,
   };
 
+  public selectedUserForEdit: IUser = {} as IUser;
+
   constructor(private service: UsersService) {}
 
   ngOnInit(): void {
@@ -45,14 +47,20 @@ export class ListComponent implements OnInit {
     });
   }
 
-  public userAddedHandler(): void {
+  public refreshUsersAndCloseDrawer(event: componentTypes): void {
     this.getUsers();
-    this.closeClickHandler('ADD');
+    this.closeClickHandler(event);
   }
 
   public addClickHandler(): void {
     this.isDrawerVisible = true;
     this.drawerVisibilityBooleans.ADD = true;
+  }
+
+  public editClickHandler(row: IUser): void {
+    this.selectedUserForEdit = { ...row };
+    this.isDrawerVisible = true;
+    this.drawerVisibilityBooleans.EDIT = true;
   }
 
   public closeClickHandler(type: componentTypes): void {

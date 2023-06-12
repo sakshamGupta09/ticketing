@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
 import { LoaderModule } from '@shared/loader/loader.module';
 import { MatButtonModule } from '@angular/material/button';
 import { DrawerModule } from '@shared/drawer/drawer.module';
@@ -16,9 +17,10 @@ import { UsersRoutingModule } from './users-routing.module';
 import { ListComponent } from './components/list/list.component';
 
 import { AddComponent } from './components/add/add.component';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
-  declarations: [ListComponent, AddComponent],
+  declarations: [ListComponent, AddComponent, EditComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -31,6 +33,7 @@ import { AddComponent } from './components/add/add.component';
     MatInputModule,
     MatSelectModule,
     MatIconModule,
+    MatMenuModule,
     FormsModule,
     ReactiveFormsModule,
   ],

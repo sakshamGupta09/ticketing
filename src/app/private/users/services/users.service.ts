@@ -24,6 +24,15 @@ export class UsersService {
     });
   }
 
+  public updateUser(userId: number, payload: IAddUserRequest) {
+    return this.http.put<IHttpResponse<IAddUserResponse>>(
+      `/user/update/${userId}`,
+      {
+        user: payload,
+      }
+    );
+  }
+
   public checkUserExists(controlType: 'email' | 'phone', controlValue: string) {
     return this.http
       .get<IHttpResponse<{ exists: boolean }>>('/user/exists', {

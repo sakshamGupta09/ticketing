@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { IAddUserRequest, componentTypes } from '../../models';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { IUser } from 'src/app/core/models/user';
 import {
   AbstractControl,
   FormBuilder,
@@ -10,13 +10,16 @@ import { ALL_ROLES } from '../../../../core/models/roles';
 import FORM_ERRORS from '../../constants/form-errors';
 import { UsersService } from '../../services/users.service';
 import noSpaceValidator from '../../../../core/form-validators/no-space';
+import { IAddUserRequest, componentTypes } from '../../models';
 
 @Component({
-  selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss'],
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss'],
 })
-export class AddComponent {
+export class EditComponent implements OnInit {
+  @Input() user: IUser = {} as IUser;
+
   public form: FormGroup = {} as FormGroup;
 
   public isLoading = false;
@@ -27,37 +30,46 @@ export class AddComponent {
 
   @Output() closeClicked: EventEmitter<componentTypes> = new EventEmitter();
 
-  @Output() userAdded: EventEmitter<componentTypes> = new EventEmitter();
+  @Output() userUpdated: EventEmitter<componentTypes> = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private service: UsersService) {
+  constructor(private fb: FormBuilder, private service: UsersService) {}
+
+  ngOnInit(): void {
     this.initForm();
   }
 
   private initForm(): void {
     this.form = this.fb.group({
-      firstName: ['', [Validators.required, noSpaceValidator]],
-      lastName: ['', [Validators.required, noSpaceValidator]],
+      firstName: [
+        this.user.first_name,
+        [Validators.required, noSpaceValidator],
+      ],
+      lastName: [this.user.last_name, [Validators.required, noSpaceValidator]],
       email: [
-        '',
+        this.user.email,
         {
           validators: [Validators.required, Validators.email],
-          asyncValidators: [this.service.userExistsValidator('email')],
+          asyncValidators: [
+            this.service.userExistsValidator('email', this.user.email),
+          ],
           updateOn: 'blur',
         },
       ],
       phone: [
-        '',
+        this.user.phone,
         {
           validators: [
             Validators.required,
             Validators.minLength(10),
             Validators.maxLength(10),
           ],
-          asyncValidators: [this.service.userExistsValidator('phone')],
+          asyncValidators: [
+            this.service.userExistsValidator('phone', this.user.phone),
+          ],
           updateOn: 'blur',
         },
       ],
-      roleId: ['', [Validators.required]],
+      roleId: [this.user.role_id, [Validators.required]],
     });
   }
 
@@ -67,19 +79,15 @@ export class AddComponent {
     }
     this.isLoading = true;
     const payload = this.getPayload();
-    this.service.addUser(payload).subscribe({
+    this.service.updateUser(this.user.role_id, payload).subscribe({
       next: () => {
         this.isLoading = false;
-        this.userAdded.emit('ADD');
+        this.userUpdated.emit('EDIT');
       },
       error: () => {
         this.isLoading = false;
       },
     });
-  }
-
-  public closeClickHandler(): void {
-    this.closeClicked.emit('ADD');
   }
 
   private getPayload(): IAddUserRequest {
@@ -110,5 +118,9 @@ export class AddComponent {
 
   get roleId(): AbstractControl {
     return this.form.get('roleId')!;
+  }
+
+  public closeClickHandler(): void {
+    this.closeClicked.emit('EDIT');
   }
 }

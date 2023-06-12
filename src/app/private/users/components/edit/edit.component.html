@@ -1,6 +1,6 @@
 <app-drawer-content (closeClicked)="closeClickHandler()">
   <!-- Title -->
-  <ng-container title>Add new user</ng-container>
+  <ng-container title>Update user</ng-container>
 
   <!-- Body -->
   <ng-container body>
@@ -139,7 +139,7 @@
         color="primary"
         class="font-bold text-white"
         (click)="onSubmit()">
-        <span [hidden]="isLoading">ADD USER</span>
+        <span [hidden]="isLoading">UPDATE USER</span>
         <fa-icon
           [hidden]="!isLoading"
           icon="circle-notch"
