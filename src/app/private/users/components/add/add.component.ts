@@ -34,14 +34,25 @@ export class AddComponent {
     this.form = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      email: [
+        '',
+        {
+          validators: [Validators.required, Validators.email],
+          asyncValidators: [this.service.userExistsValidator('email')],
+          updateOn: 'blur',
+        },
+      ],
       phone: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(10),
-        ],
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(10),
+            Validators.maxLength(10),
+          ],
+          asyncValidators: [this.service.userExistsValidator('phone')],
+          updateOn: 'blur',
+        },
       ],
       roleId: ['', [Validators.required]],
     });

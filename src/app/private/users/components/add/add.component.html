@@ -51,12 +51,23 @@
           formControlName="email"
           required />
 
+        <div matSuffix [hidden]="!email.pending">
+          <fa-icon
+            icon="circle-notch"
+            class="color-theme p-sm"
+            [spin]="true"
+            size="xl"></fa-icon>
+        </div>
+
         <mat-error *ngIf="email.invalid && email.touched">
           <ng-container *ngIf="email.errors?.['required']">
             {{ formErrors.REQUIRED }}
           </ng-container>
           <ng-container *ngIf="email.errors?.['email']">
             {{ formErrors.INVALID_EMAIL }}
+          </ng-container>
+          <ng-container *ngIf="email.errors?.['isTaken']">
+            {{ formErrors.EMAIL_EXISTS }}
           </ng-container>
         </mat-error>
       </mat-form-field>
@@ -71,6 +82,13 @@
           formControlName="phone"
           required
           maxlength="10" />
+        <div matSuffix [hidden]="!phone.pending">
+          <fa-icon
+            icon="circle-notch"
+            class="color-theme p-sm"
+            [spin]="true"
+            size="xl"></fa-icon>
+        </div>
 
         <mat-error *ngIf="phone.invalid && phone.touched">
           <ng-container *ngIf="phone.errors?.['required']">
@@ -79,6 +97,9 @@
           <ng-container
             *ngIf="phone.errors?.['minlength'] || phone.errors?.['maxlength']">
             {{ formErrors.INVALID_PHONE }}
+          </ng-container>
+          <ng-container *ngIf="email.errors?.['isTaken']">
+            {{ formErrors.PHONE_EXISTS }}
           </ng-container>
         </mat-error>
       </mat-form-field>
