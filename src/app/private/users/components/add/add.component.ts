@@ -6,9 +6,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ALL_ROLES } from 'src/app/core/models/roles';
+import { ALL_ROLES } from '../../../../core/models/roles';
 import FORM_ERRORS from '../../constants/form-errors';
 import { UsersService } from '../../services/users.service';
+import noSpaceValidator from '../../../../core/form-validators/no-space';
 
 @Component({
   selector: 'app-add',
@@ -26,14 +27,16 @@ export class AddComponent {
 
   @Output() closeClicked: EventEmitter<componentTypes> = new EventEmitter();
 
+  @Output() userAdded: EventEmitter<void> = new EventEmitter();
+
   constructor(private fb: FormBuilder, private service: UsersService) {
     this.initForm();
   }
 
   private initForm(): void {
     this.form = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', [Validators.required, noSpaceValidator]],
+      lastName: ['', [Validators.required, noSpaceValidator]],
       email: [
         '',
         {
@@ -67,6 +70,7 @@ export class AddComponent {
     this.service.addUser(payload).subscribe({
       next: () => {
         this.isLoading = false;
+        this.userAdded.emit();
       },
       error: () => {
         this.isLoading = false;

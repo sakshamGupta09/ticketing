@@ -20,6 +20,9 @@
             <ng-container *ngIf="firstName.errors?.['required']">
               {{ formErrors.REQUIRED }}
             </ng-container>
+            <ng-container *ngIf="firstName.errors?.['hasSpaces']">
+              {{ formErrors.NO_SPACES }}
+            </ng-container>
           </mat-error>
         </mat-form-field>
 
@@ -36,6 +39,9 @@
           <mat-error *ngIf="lastName.invalid && lastName.touched">
             <ng-container *ngIf="lastName.errors?.['required']">
               {{ formErrors.REQUIRED }}
+            </ng-container>
+            <ng-container *ngIf="lastName.errors?.['hasSpaces']">
+              {{ formErrors.NO_SPACES }}
             </ng-container>
           </mat-error>
         </mat-form-field>

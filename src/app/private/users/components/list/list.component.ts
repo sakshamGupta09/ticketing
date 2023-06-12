@@ -32,7 +32,7 @@ export class ListComponent implements OnInit {
     this.getUsers();
   }
 
-  private getUsers(): void {
+  public getUsers(): void {
     this.isLoading = true;
     this.service.getUsers().subscribe({
       next: (response) => {
@@ -43,6 +43,11 @@ export class ListComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  public userAddedHandler(): void {
+    this.getUsers();
+    this.closeClickHandler('ADD');
   }
 
   public addClickHandler(): void {

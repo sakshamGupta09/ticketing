@@ -198,4 +198,29 @@ describe('ListComponent', () => {
 
     expect(screen.queryByRole('heading', { name: /Add new user/i })).toBeNull();
   });
+
+  test('it should fetch the users list and close the drawer when user is added successfully', async () => {
+    const mockUserService = createMock(UsersService);
+    mockUserService.getUsers.mockImplementation(() =>
+      of({ data: { users: USERS_MOCK } })
+    );
+
+    const { fixture, detectChanges } = await render(ListComponent, {
+      declarations: [DrawerComponent, AddComponent],
+      imports: [TestModule],
+      componentProviders: [
+        { provide: UsersService, useValue: mockUserService },
+      ],
+    });
+
+    jest.spyOn(fixture.componentInstance, 'getUsers');
+    jest.spyOn(fixture.componentInstance, 'closeClickHandler');
+
+    fixture.componentInstance.userAddedHandler();
+
+    detectChanges();
+
+    expect(fixture.componentInstance.getUsers).toHaveBeenCalledTimes(1);
+    expect(fixture.componentInstance.closeClickHandler).toHaveBeenCalledTimes(1);
+  });
 });

@@ -66,5 +66,7 @@
 <app-drawer [isVisible]="isDrawerVisible">
   <app-add
     *ngIf="drawerVisibilityBooleans.ADD"
-    (closeClicked)="closeClickHandler($event)"></app-add>
+    (closeClicked)="closeClickHandler($event)"
+    (userAdded)="userAddedHandler()">
+  </app-add>
 </app-drawer>

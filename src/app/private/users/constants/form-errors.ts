@@ -4,6 +4,7 @@ const FORM_ERRORS = {
   INVALID_PHONE: 'Please enter a valid phone number',
   EMAIL_EXISTS: 'Email already exists',
   PHONE_EXISTS: 'Phone already exists',
+  NO_SPACES: 'Spaces are not allowed',
 };
 
 export default FORM_ERRORS;
