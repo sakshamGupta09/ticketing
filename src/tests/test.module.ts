@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,6 +31,8 @@ import { DrawerModule } from '@shared/drawer/drawer.module';
     ReactiveFormsModule,
     RouterTestingModule,
     MatTableModule,
+    DrawerModule,
+    MatSelectModule,
   ],
   exports: [
     CommonModule,
@@ -46,6 +49,7 @@ import { DrawerModule } from '@shared/drawer/drawer.module';
     RouterTestingModule,
     MatTableModule,
     DrawerModule,
+    MatSelectModule,
   ],
 })
 export class TestModule {}

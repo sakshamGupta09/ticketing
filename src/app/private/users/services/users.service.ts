@@ -35,8 +35,14 @@ export class UsersService {
       .pipe(map((response) => response.data.exists));
   }
 
-  public userExistsValidator(controlType: 'email' | 'phone'): AsyncValidatorFn {
+  public userExistsValidator(
+    controlType: 'email' | 'phone',
+    previousControlValue: string = ''
+  ): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (previousControlValue && control.value === previousControlValue) {
+        return of(null);
+      }
       return this.checkUserExists(controlType, control.value).pipe(
         map((isTaken) => (isTaken ? { isTaken: true } : null)),
         catchError(() => of(null))
