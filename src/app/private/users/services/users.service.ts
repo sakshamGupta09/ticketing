@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IHttpResponse } from 'src/app/core/models/api-response';
 import { IUser } from 'src/app/core/models/user';
-import { IAddUserRequest, IAddUserResponse } from '../models';
+import { IAddUserRequest, IAddUserResponse, IGetUsersRequest } from '../models';
 import { Observable, catchError, map, of } from 'rxjs';
 import {
   AbstractControl,
@@ -14,8 +14,10 @@ import {
 export class UsersService {
   constructor(private http: HttpClient) {}
 
-  public getUsers() {
-    return this.http.get<IHttpResponse<{ users: IUser[] }>>('/user/list');
+  public getUsers(payload: IGetUsersRequest) {
+    return this.http.get<
+      IHttpResponse<{ users: IUser[]; totalRecords: number }>
+    >('/user/list', { params: payload as any });
   }
 
   public addUser(payload: IAddUserRequest) {

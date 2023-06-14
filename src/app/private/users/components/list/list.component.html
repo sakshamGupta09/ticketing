@@ -9,74 +9,84 @@
   </button>
 </div>
 
-<div class="table__container mt-xs mat-elevation-z2">
-  <!-- Table -->
+<div class="mat-elevation-z8 mt-xs">
+  <div class="table__container">
+    <!-- Table -->
 
-  <table mat-table [dataSource]="users">
-    <!-- ID -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-    </ng-container>
+    <table mat-table [dataSource]="users">
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      </ng-container>
 
-    <!-- Name -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let row" class="titlecase">
-        {{ row.first_name + ' ' + row.last_name }}
-      </td>
-    </ng-container>
+      <!-- Name -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row" class="titlecase">
+          {{ row.first_name + ' ' + row.last_name }}
+        </td>
+      </ng-container>
 
-    <!-- Email -->
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let row">{{ row.email }}</td>
-    </ng-container>
+      <!-- Email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+      </ng-container>
 
-    <!-- Phone -->
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef>Contact</th>
-      <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
-    </ng-container>
+      <!-- Phone -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef>Contact</th>
+        <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
+      </ng-container>
 
-    <!-- Role -->
-    <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef>Role</th>
-      <td mat-cell *matCellDef="let row" class="uppercase">
-        {{ rolesMapping[row.role_id] }}
-      </td>
-    </ng-container>
+      <!-- Role -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let row" class="uppercase">
+          {{ rolesMapping[row.role_id] }}
+        </td>
+      </ng-container>
 
-    <!-- Actions -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let row" class="uppercase">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="editClickHandler(row)">
-            <mat-icon>dialpad</mat-icon>
-            <span>Edit user</span>
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let row" class="uppercase">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
           </button>
-          <button mat-menu-item>
-            <mat-icon>voicemail</mat-icon>
-            <span>Delete user</span>
-          </button>
-        </mat-menu>
-      </td>
-    </ng-container>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editClickHandler(row)">
+              <mat-icon>dialpad</mat-icon>
+              <span>Edit user</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>voicemail</mat-icon>
+              <span>Delete user</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="columns"></tr>
-    <tr mat-row *matRowDef="let row; columns: columns"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    </table>
 
-  <!-- No data -->
-  <p
-    *ngIf="!isLoading && users.length === 0"
-    class="p-md font-semibold text-sm">
-    No Data available
-  </p>
+    <!-- No data -->
+    <p
+      *ngIf="!isLoading && users.length === 0"
+      class="p-md font-semibold text-sm">
+      No Data available
+    </p>
+  </div>
+
+  <!-- Pagination -->
+  <mat-paginator
+    [length]="paginationParams.totalRecords"
+    [pageSize]="paginationParams.limit"
+    [pageSizeOptions]="pageSizeOptions"
+    aria-label="Select page">
+  </mat-paginator>
 </div>
 
 <!-- Loader -->

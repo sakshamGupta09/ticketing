@@ -1,5 +1,10 @@
 export type componentTypes = 'ADD' | 'EDIT';
 
+export interface IGetUsersRequest {
+  limit: number;
+  offset: number;
+}
+
 export interface IAddUserRequest {
   first_name: string;
   last_name: string;

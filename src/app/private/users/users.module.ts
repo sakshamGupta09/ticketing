@@ -12,6 +12,10 @@ import { LoaderModule } from '@shared/loader/loader.module';
 import { MatButtonModule } from '@angular/material/button';
 import { DrawerModule } from '@shared/drawer/drawer.module';
 import { IconsModule } from '@shared/icons/icons.module';
+import {
+  MAT_PAGINATOR_DEFAULT_OPTIONS,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 
 import { UsersRoutingModule } from './users-routing.module';
 import { ListComponent } from './components/list/list.component';
@@ -36,6 +40,13 @@ import { EditComponent } from './components/edit/edit.component';
     MatMenuModule,
     FormsModule,
     ReactiveFormsModule,
+    MatPaginatorModule,
+  ],
+  providers: [
+    {
+      provide: MAT_PAGINATOR_DEFAULT_OPTIONS,
+      useValue: { formFieldAppearance: 'fill' },
+    },
   ],
 })
 export class UsersModule {}

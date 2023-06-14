@@ -79,7 +79,7 @@ export class EditComponent implements OnInit {
     }
     this.isLoading = true;
     const payload = this.getPayload();
-    this.service.updateUser(this.user.role_id, payload).subscribe({
+    this.service.updateUser(this.user.id, payload).subscribe({
       next: () => {
         this.isLoading = false;
         this.userUpdated.emit('EDIT');
