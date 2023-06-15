@@ -6,6 +6,7 @@ import { ROLES_MAP } from '../../../../core/models/roles';
 import { IGetUsersRequest, componentTypes } from '../../models';
 import { IPaginationParams } from 'src/app/core/models/pagination';
 import { DEFAULT_PAGINATION_OPTIONS } from 'src/app/core/constants/pagination';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-list',
@@ -70,6 +71,12 @@ export class ListComponent implements OnInit {
       limit: this.paginationParams.limit,
       offset: this.paginationParams.offset,
     };
+  }
+
+  public pageEventHandler(e: PageEvent): void {
+    this.paginationParams.limit = e.pageSize;
+    this.paginationParams.offset = e.pageIndex * e.pageSize;
+    this.getUsers();
   }
 
   public refreshUsersAndCloseDrawer(event: componentTypes): void {

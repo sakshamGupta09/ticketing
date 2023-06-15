@@ -57,11 +57,11 @@
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="editClickHandler(row)">
-              <mat-icon>dialpad</mat-icon>
+              <mat-icon class="icon--light">edit</mat-icon>
               <span>Edit user</span>
             </button>
             <button mat-menu-item>
-              <mat-icon>voicemail</mat-icon>
+              <mat-icon class="icon--light">delete</mat-icon>
               <span>Delete user</span>
             </button>
           </mat-menu>
@@ -81,12 +81,15 @@
   </div>
 
   <!-- Pagination -->
-  <mat-paginator
-    [length]="paginationParams.totalRecords"
-    [pageSize]="paginationParams.limit"
-    [pageSizeOptions]="pageSizeOptions"
-    aria-label="Select page">
-  </mat-paginator>
+  <ng-container *ngIf="paginationParams.totalRecords > 0">
+    <mat-paginator
+      [length]="paginationParams.totalRecords"
+      [pageSize]="paginationParams.limit"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageEventHandler($event)"
+      aria-label="Select page">
+    </mat-paginator>
+  </ng-container>
 </div>
 
 <!-- Loader -->
