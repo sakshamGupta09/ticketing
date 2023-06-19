@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { LoaderModule } from '@shared/loader/loader.module';
 import { MatButtonModule } from '@angular/material/button';
 import { DrawerModule } from '@shared/drawer/drawer.module';
+import { DialogModule } from '@shared/dialog/dialog.module';
 import { IconsModule } from '@shared/icons/icons.module';
 import {
   MAT_PAGINATOR_DEFAULT_OPTIONS,
@@ -22,9 +23,10 @@ import { ListComponent } from './components/list/list.component';
 
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
+import { DeleteComponent } from './components/delete/delete.component';
 
 @NgModule({
-  declarations: [ListComponent, AddComponent, EditComponent],
+  declarations: [ListComponent, AddComponent, EditComponent, DeleteComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -33,6 +35,7 @@ import { EditComponent } from './components/edit/edit.component';
     MatButtonModule,
     IconsModule,
     DrawerModule,
+    DialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,

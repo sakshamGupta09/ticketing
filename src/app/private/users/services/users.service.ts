@@ -35,6 +35,10 @@ export class UsersService {
     );
   }
 
+  public deleteUser(userId: number) {
+    return this.http.delete<IHttpResponse<object>>(`/user/delete/${userId}`);
+  }
+
   public checkUserExists(controlType: 'email' | 'phone', controlValue: string) {
     return this.http
       .get<IHttpResponse<{ exists: boolean }>>('/user/exists', {

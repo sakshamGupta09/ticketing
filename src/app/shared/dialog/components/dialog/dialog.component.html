@@ -1,0 +1,35 @@
+<div class="dialog__container">
+  <div
+    class="dialog__content mat-elevation-z4"
+    role="dialog"
+    [style.width]="dialogWidth">
+    <!-- Header -->
+    <div
+      class="dialog__header flex justify-between gap-2 items-center"
+      data-testid="dialog-header">
+      <h2 class="dialog__title">
+        <ng-content select="[title]"></ng-content>
+      </h2>
+
+      <button
+        class="icon--light"
+        mat-icon-button
+        aria-label="Close dialog"
+        (click)="closeClickHandler()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div
+      class="dialog__body flex-grow overflow-y-auto"
+      data-testid="dialog-body">
+      <ng-content select="[body]"></ng-content>
+    </div>
+
+    <!-- Footer -->
+    <div class="dialog__footer" data-testid="dialog-footer">
+      <ng-content select="[footer]"></ng-content>
+    </div>
+  </div>
+</div>

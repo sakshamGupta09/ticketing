@@ -102,7 +102,7 @@
             *ngIf="phone.errors?.['minlength'] || phone.errors?.['maxlength']">
             {{ formErrors.INVALID_PHONE }}
           </ng-container>
-          <ng-container *ngIf="email.errors?.['isTaken']">
+          <ng-container *ngIf="phone.errors?.['isTaken']">
             {{ formErrors.PHONE_EXISTS }}
           </ng-container>
         </mat-error>

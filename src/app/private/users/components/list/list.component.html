@@ -3,7 +3,7 @@
   <button
     mat-stroked-button
     color="primary"
-    class="font-mediumbold"
+    class="font-bold"
     (click)="addClickHandler()">
     ADD USER
   </button>
@@ -60,7 +60,7 @@
               <mat-icon class="icon--light">edit</mat-icon>
               <span>Edit user</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="deleteClickHandler(row.id)">
               <mat-icon class="icon--light">delete</mat-icon>
               <span>Delete user</span>
             </button>
@@ -110,3 +110,10 @@
     (userUpdated)="refreshUsersAndCloseDrawer($event)">
   </app-edit>
 </app-drawer>
+
+<!-- Delete user -->
+<app-delete
+  *ngIf="isDialogVisible"
+  [userId]="userIdToBeDeleted"
+  (closePopupClicked)="closeDeleteDialog()"
+  (userDeleted)="afterUserDeleted($event)"></app-delete>

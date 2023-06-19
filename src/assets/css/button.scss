@@ -1,3 +1,7 @@
 .mat-mdc-raised-button:not(:disabled) {
   color: #fff !important;
 }
+
+.mat-mdc-outlined-button:not(:disabled) {
+  border-color: var(--colorPrimary) !important;
+}

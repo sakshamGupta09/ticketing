@@ -31,6 +31,10 @@ export class ListComponent implements OnInit {
     EDIT: false,
   };
 
+  public isDialogVisible = false;
+
+  public userIdToBeDeleted!: number;
+
   public paginationParams: IPaginationParams = {} as IPaginationParams;
 
   readonly pageSizeOptions = DEFAULT_PAGINATION_OPTIONS.PAGE_SIZE_OPTIONS;
@@ -95,8 +99,22 @@ export class ListComponent implements OnInit {
     this.drawerVisibilityBooleans.EDIT = true;
   }
 
+  public deleteClickHandler(userId: number): void {
+    this.userIdToBeDeleted = userId;
+    this.isDialogVisible = true;
+  }
+
   public closeClickHandler(type: componentTypes): void {
     this.drawerVisibilityBooleans[type] = false;
     this.isDrawerVisible = false;
+  }
+
+  public afterUserDeleted(userId: number): void {
+    this.users = this.users.filter((user) => user.id !== userId);
+    this.closeDeleteDialog();
+  }
+
+  public closeDeleteDialog(): void {
+    this.isDialogVisible = false;
   }
 }

@@ -1,0 +1,45 @@
+.dialog {
+  &__container {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(24, 50, 71, 0.6);
+    z-index: 5;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__content {
+    background-color: white;
+    pointer-events: auto;
+    z-index: 6;
+  }
+
+  &__header {
+    padding: 0.5rem 0.85rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    color: #183247;
+  }
+
+  &__body {
+    padding: 1rem 0.85rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  &__footer {
+    padding: 1rem 0.785rem;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .dialog__content {
+    width: 100% !important;
+  }
+}
