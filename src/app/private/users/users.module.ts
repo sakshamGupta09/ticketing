@@ -24,9 +24,11 @@ import { ListComponent } from './pages/list/list.component';
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { DeleteComponent } from './components/delete/delete.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { FiltersFormComponent } from './components/filters-form/filters-form.component';
 
 @NgModule({
-  declarations: [ListComponent, AddComponent, EditComponent, DeleteComponent],
+  declarations: [ListComponent, AddComponent, EditComponent, DeleteComponent, SearchBarComponent, FiltersFormComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
