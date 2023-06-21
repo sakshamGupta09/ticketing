@@ -19,7 +19,7 @@ import {
 } from '@angular/material/paginator';
 
 import { UsersRoutingModule } from './users-routing.module';
-import { ListComponent } from './components/list/list.component';
+import { ListComponent } from './pages/list/list.component';
 
 import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';

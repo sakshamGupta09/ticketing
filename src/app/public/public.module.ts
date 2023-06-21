@@ -11,10 +11,10 @@ import { AlertModule } from '../shared/alert/alert.module';
 import { LogoModule } from '@shared/logo/logo.module';
 import { PublicRoutingModule } from './public-routing.module';
 
-import { LoginComponent } from './components/login/login.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { ForgotPasswordEmailSentComponent } from './components/forgot-password-email-sent/forgot-password-email-sent.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { ForgotPasswordEmailSentComponent } from './pages/forgot-password-email-sent/forgot-password-email-sent.component';
 
 @NgModule({
   declarations: [
